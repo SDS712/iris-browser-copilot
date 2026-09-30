@@ -1,0 +1,58 @@
+---
+/**
+ * Every QuickCred page: the honesty banner, header, footer, cookie banner, toast and, when
+ * built with IRIS_DEMO_WIDGET=true, the Iris widget. Ordinary markup only.
+ */
+import '@fontsource/plus-jakarta-sans/400.css';
+import '@fontsource/plus-jakarta-sans/500.css';
+import '@fontsource/plus-jakarta-sans/600.css';
+import '@fontsource/plus-jakarta-sans/700.css';
+import '../styles/qc-tokens.css';
+import '../styles/base.css';
+import '../styles/qc.css';
+import { IRIS_DEMO_WIDGET, IRIS_PUBLIC_URL } from 'astro:env/server';
+import CookieBanner from '../components/qc/CookieBanner.astro';
+import Footer from '../components/qc/Footer.astro';
+import Header from '../components/qc/Header.astro';
+import HonestyBanner from '../components/qc/HonestyBanner.astro';
+import Toast from '../components/qc/Toast.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** The 404 page has no widget. */
+  widget?: boolean;
+}
+const {
+  title,
+  description = 'QuickCred is a fictional lender, built to show what Iris catches.',
+  widget = true,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, IRIS_PUBLIC_URL).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon-qc.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <HonestyBanner />
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <CookieBanner />
+    <Toast />
+    {widget && IRIS_DEMO_WIDGET && (
+      <script is:inline src="/widget/iris-widget.js" defer data-api-base="/api"></script>
+    )}
+  </body>
+</html>

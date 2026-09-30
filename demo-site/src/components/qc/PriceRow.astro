@@ -1,0 +1,36 @@
+---
+/** One row of a price list: the label, then the amount written like "₹1,299". */
+interface Props {
+  label: string;
+  amount: string;
+  strong?: boolean;
+}
+const { label, amount, strong = false } = Astro.props;
+---
+
+<div class:list={['price-row', { 'price-row--strong': strong }]}>
+  <span>{label}</span>
+  <span class="price-row__amount">{amount}</span>
+</div>
+
+<style>
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--qc-border);
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .price-row__amount {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .price-row--strong {
+    border-bottom: 0;
+    font-weight: 700;
+  }
+</style>

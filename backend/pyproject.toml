@@ -1,0 +1,62 @@
+[project]
+name = "iris-backend"
+version = "1.0.0"
+description = "Iris backend: voice tokens, page tools and spend caps"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.6",
+    "httpx>=0.28",
+    "aiosqlite>=0.20",
+    "rank-bm25>=0.2.2",
+    "rapidfuzz>=3.10",
+    "tldextract>=5.1",
+    "tzdata>=2024.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "pytest-cov>=6.0",
+    "respx>=0.21",
+    "ruff>=0.8",
+    "mypy>=1.13",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF", "ASYNC", "S", "PTH"]
+ignore = [
+    "RUF001",  # ambiguous unicode: ₹, en dashes and curly quotes are intended
+    "RUF002",
+    "RUF003",
+    "SIM905",  # word lists read better as one split string
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "S105", "S106", "S311"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = ["rank_bm25"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+addopts = "--cov=app/services --cov-report=term-missing:skip-covered --cov-fail-under=85"
+filterwarnings = ["error::pytest.PytestUnraisableExceptionWarning"]

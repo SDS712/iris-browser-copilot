@@ -1,0 +1,69 @@
+---
+/** Radio buttons in a fieldset whose legend names the question. */
+interface Props {
+  name: string;
+  legend: string;
+  options: readonly string[];
+  required?: boolean;
+}
+const { name, legend, options, required = false } = Astro.props;
+---
+
+<fieldset class="radios">
+  <legend>
+    {legend}
+    {required && (
+      <span class="radios__required" aria-hidden="true">
+        {' '}
+        *
+      </span>
+    )}
+  </legend>
+  {options.map((option, index) => (
+    <div class="radios__option">
+      <input
+        type="radio"
+        id={`${name}-${String(index)}`}
+        name={name}
+        value={option}
+        required={required}
+      />
+      <label for={`${name}-${String(index)}`}>{option}</label>
+    </div>
+  ))}
+</fieldset>
+
+<style>
+  .radios {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  legend {
+    margin-bottom: 6px;
+    padding: 0;
+    font-size: 15px;
+    line-height: 22px;
+    font-weight: 600;
+  }
+
+  .radios__required {
+    color: var(--qc-danger);
+  }
+
+  .radios__option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 32px;
+  }
+
+  input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--qc-primary);
+  }
+</style>

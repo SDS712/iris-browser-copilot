@@ -1,0 +1,267 @@
+---
+/**
+ * Checkout: step 1 "Your order", then step 2 "Review & pay", added to the page
+ * only after "Continue". Traps: a pre-ticked paid add-on, a pre-ticked free trial that turns
+ * paid, and a convenience fee that first appears on the review step.
+ */
+import { BRAND, FIGURES } from '../../brand';
+import Checkbox from '../../components/qc/Checkbox.astro';
+import PriceRow from '../../components/qc/PriceRow.astro';
+import SummaryCard from '../../components/qc/SummaryCard.astro';
+import QuickCredLayout from '../../layouts/QuickCredLayout.astro';
+
+const shieldLabel = `Protect your purchase: ${BRAND.protection} ${FIGURES.shieldPerYear}/year`;
+const plusLabel = `${BRAND.membership}: free for ${String(FIGURES.plusTrialDays)} days, then ${FIGURES.plusPerMonth}/month`;
+const warrantyLabel = `Extended warranty (2 years) ${FIGURES.warranty}`;
+---
+
+<QuickCredLayout title={`Checkout – ${BRAND.company}`}>
+  <div class="container checkout">
+    <h1 class="qc-page-title checkout__title">Checkout</h1>
+    <div class="checkout__main">
+      <section class="qc-card step" id="step-order" aria-labelledby="order-title">
+        <h2 class="qc-section-title" id="order-title">
+          Your order
+        </h2>
+        <div class="item">
+          <div class="item__row">
+            <span class="item__name">{BRAND.productLong}</span>
+            <span class="item__price">{FIGURES.price}</span>
+          </div>
+          <p class="qc-secondary item__emi">
+            Paid with {BRAND.company} EMI: {FIGURES.emi}/month × {String(FIGURES.tenure)}
+          </p>
+        </div>
+        <fieldset class="addons">
+          <legend>Add-ons</legend>
+          <Checkbox id="addon-shield" checked>
+            {shieldLabel}
+          </Checkbox>
+          <Checkbox id="addon-plus" checked>
+            {plusLabel}
+          </Checkbox>
+          <Checkbox id="addon-warranty">{warrantyLabel}</Checkbox>
+        </fieldset>
+        <button type="button" class="qc-button qc-button--large" id="continue">
+          Continue
+        </button>
+      </section>
+    </div>
+
+    <aside class="checkout__summary">
+      <SummaryCard title="Order summary">
+        <div id="summary-rows">
+          <PriceRow label={`${BRAND.productLong} on EMI`} amount={FIGURES.price} />
+          <div data-row="shield">
+            <PriceRow label={BRAND.protection} amount={`${FIGURES.shieldPerYear}/year`} />
+          </div>
+          <div data-row="plus" class="plain-row">
+            <span>{BRAND.membership}</span>
+            <span>Free for {String(FIGURES.plusTrialDays)} days</span>
+          </div>
+          <div data-row="warranty" hidden>
+            <PriceRow label="Extended warranty (2 years)" amount={FIGURES.warranty} />
+          </div>
+          <PriceRow label="Due today" amount={FIGURES.dueToday} strong />
+        </div>
+      </SummaryCard>
+    </aside>
+  </div>
+
+  <template id="review-template">
+    <section class="qc-card step review" id="step-review" aria-labelledby="review-title">
+      <h2 class="qc-section-title" id="review-title">
+        Review &amp; pay
+      </h2>
+      <div class="review__rows"></div>
+      <p class="review__plan">
+        {FIGURES.emi}/month for {String(FIGURES.tenure)} months, first instalment on the 5th of next
+        month
+      </p>
+      <a class="qc-button qc-button--large" href="/demo/payment-failed" id="pay">
+        Pay
+      </a>
+      <p class="qc-fine">No real payment is taken in this demo.</p>
+      <a href="#step-order" id="back">
+        Back
+      </a>
+    </section>
+  </template>
+</QuickCredLayout>
+
+<script>
+  // Prices in rupees, kept here so the summary and the review step always agree.
+  const SHIELD = 1299;
+  const WARRANTY = 2499;
+  const FEE = 49;
+  const rupees = (amount: number) => `₹${amount.toLocaleString('en-IN')}`;
+
+  const ticked = (id: string) =>
+    (document.getElementById(id) as HTMLInputElement | null)?.checked ?? false;
+  const dueToday = () =>
+    (ticked('addon-shield') ? SHIELD : 0) + (ticked('addon-warranty') ? WARRANTY : 0);
+
+  function row(label: string, amount: string, strong = false): string {
+    return `<div class="price-row${strong ? ' price-row--strong' : ''}"><span>${label}</span><span class="price-row__amount">${amount}</span></div>`;
+  }
+
+  /** Step 1's summary card follows the ticks. */
+  function updateSummary(): void {
+    const rows = document.getElementById('summary-rows');
+    if (!rows) return;
+    for (const [name, id] of [
+      ['shield', 'addon-shield'],
+      ['plus', 'addon-plus'],
+      ['warranty', 'addon-warranty'],
+    ] as const) {
+      const el = rows.querySelector<HTMLElement>(`[data-row="${name}"]`);
+      if (el) el.hidden = !ticked(id);
+    }
+    const due = rows.querySelector('.price-row--strong .price-row__amount');
+    if (due) due.textContent = rupees(dueToday());
+  }
+
+  /** Step 2 repeats step 1's rows, adds the convenience fee, and asks for payment. */
+  function showReview(): void {
+    if (document.getElementById('step-review')) return;
+    const template = document.getElementById('review-template') as HTMLTemplateElement | null;
+    const step = template?.content.firstElementChild?.cloneNode(true) as HTMLElement | undefined;
+    if (!step) return;
+    const total = dueToday() + FEE;
+    const rows = [row('Nimbus 14 laptop on EMI', '₹59,999')];
+    if (ticked('addon-shield')) rows.push(row('QuickCred Shield', `${rupees(SHIELD)}/year`));
+    if (ticked('addon-plus')) {
+      rows.push(
+        '<div class="plain-row"><span>QuickCred Plus</span><span>Free for 30 days</span></div>',
+      );
+    }
+    if (ticked('addon-warranty')) rows.push(row('Extended warranty (2 years)', rupees(WARRANTY)));
+    rows.push(row('Convenience fee', rupees(FEE)));
+    rows.push(row('Due today', rupees(total), true));
+    const target = step.querySelector('.review__rows');
+    if (target) target.innerHTML = rows.join('');
+    const pay = step.querySelector('#pay');
+    if (pay) pay.textContent = `Pay ${rupees(total)} with UPI (demo)`;
+    step.querySelector('#back')?.addEventListener('click', (event) => {
+      event.preventDefault();
+      step.remove();
+      document.getElementById('continue')?.removeAttribute('hidden');
+      document.getElementById('step-order')?.scrollIntoView({ behavior: 'smooth' });
+    });
+    document.querySelector('.checkout__main')?.append(step);
+    document.getElementById('continue')?.setAttribute('hidden', '');
+    step.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  for (const id of ['addon-shield', 'addon-plus', 'addon-warranty']) {
+    document.getElementById(id)?.addEventListener('change', updateSummary);
+  }
+  document.getElementById('continue')?.addEventListener('click', showReview);
+  updateSummary();
+</script>
+
+<style>
+  .checkout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 24px 32px;
+    align-items: start;
+    padding-top: 40px;
+  }
+
+  .checkout__title {
+    grid-column: 1 / -1;
+  }
+
+  .checkout__main {
+    display: grid;
+    gap: 24px;
+  }
+
+  .checkout__summary {
+    position: sticky;
+    top: 56px;
+  }
+
+  .step {
+    display: grid;
+    gap: 20px;
+  }
+
+  .item__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-weight: 600;
+  }
+
+  .item__price {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .item__emi {
+    margin: 4px 0 0;
+    font-size: 14px;
+  }
+
+  .addons {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .addons legend {
+    margin-bottom: 8px;
+    padding: 0;
+    font-weight: 600;
+  }
+
+  .step :global(.price-row),
+  .checkout__summary :global(.price-row) {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--qc-border);
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .step :global(.price-row--strong),
+  .checkout__summary :global(.price-row--strong) {
+    border-bottom: 0;
+    font-weight: 700;
+  }
+
+  :global(.plain-row) {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--qc-border);
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .review__plan {
+    margin: 0;
+    font-size: 15px;
+    color: var(--qc-muted);
+  }
+
+  .review .qc-fine {
+    margin: -8px 0 0;
+  }
+
+  @media (max-width: 900px) {
+    .checkout {
+      grid-template-columns: 1fr;
+    }
+
+    .checkout__summary {
+      position: static;
+    }
+  }
+</style>

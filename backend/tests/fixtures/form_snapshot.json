@@ -1,0 +1,194 @@
+{
+  "contract_version": 1,
+  "url": "https://iris.example.com/demo/apply",
+  "title": "Apply for QuickCred EMI",
+  "lang": "en",
+  "page_type_hint": "form",
+  "revision": 1,
+  "captured_at": "2026-09-26T05:30:00Z",
+  "truncated": false,
+  "fields": [
+    {
+      "id": "i-10",
+      "label": "Full name (as on PAN)",
+      "type": "text",
+      "required": true,
+      "placeholder": null,
+      "help_text": null,
+      "section": "About you",
+      "options": [],
+      "filled": false,
+      "sensitive": false
+    },
+    {
+      "id": "i-11",
+      "label": "PAN",
+      "type": "text",
+      "required": true,
+      "placeholder": "ABCDE1234F",
+      "help_text": "10 characters: 5 letters, 4 numbers, 1 letter. It's printed on your PAN card.",
+      "section": "About you",
+      "options": [],
+      "filled": false,
+      "sensitive": false
+    },
+    {
+      "id": "i-12",
+      "label": "Date of birth",
+      "type": "date",
+      "required": true,
+      "placeholder": null,
+      "help_text": null,
+      "section": "About you",
+      "options": [],
+      "filled": false,
+      "sensitive": false
+    },
+    {
+      "id": "i-13",
+      "label": "Mobile number",
+      "type": "tel",
+      "required": true,
+      "placeholder": null,
+      "help_text": null,
+      "section": "About you",
+      "options": [],
+      "filled": false,
+      "sensitive": false
+    },
+    {
+      "id": "i-14",
+      "label": "Bank account number",
+      "type": "text",
+      "required": true,
+      "placeholder": "Enter account number",
+      "help_text": null,
+      "section": "Bank details",
+      "options": [],
+      "filled": false,
+      "sensitive": true
+    },
+    {
+      "id": "i-15",
+      "label": "IFSC code",
+      "type": "text",
+      "required": true,
+      "placeholder": null,
+      "help_text": null,
+      "section": "Bank details",
+      "options": [],
+      "filled": false,
+      "sensitive": false
+    },
+    {
+      "id": "i-16",
+      "label": "CKYC number",
+      "type": "text",
+      "required": false,
+      "placeholder": null,
+      "help_text": null,
+      "section": "Bank details",
+      "options": [],
+      "filled": false,
+      "sensitive": false
+    },
+    {
+      "id": "i-17",
+      "label": "Mandate type",
+      "type": "select",
+      "required": true,
+      "placeholder": null,
+      "help_text": null,
+      "section": "Bank details",
+      "options": [
+        "NACH e-mandate",
+        "UPI AutoPay"
+      ],
+      "filled": false,
+      "sensitive": false
+    },
+    {
+      "id": "i-18",
+      "label": "OTP",
+      "type": "text",
+      "required": true,
+      "placeholder": "6 digits",
+      "help_text": null,
+      "section": "Verify",
+      "options": [],
+      "filled": false,
+      "sensitive": true
+    }
+  ],
+  "checkboxes": [
+    {
+      "id": "i-19",
+      "label": "Send me offers from QuickCred and partners on WhatsApp and SMS",
+      "kind": "checkbox",
+      "group": null,
+      "checked": true,
+      "prechecked": true,
+      "amount_inr": null,
+      "first_seen_revision": 1
+    },
+    {
+      "id": "i-20",
+      "label": "I agree to the Terms and the Privacy Policy",
+      "kind": "checkbox",
+      "group": null,
+      "checked": false,
+      "prechecked": false,
+      "amount_inr": null,
+      "first_seen_revision": 1
+    }
+  ],
+  "buttons": [
+    {
+      "id": "i-21",
+      "text": "Submit application",
+      "kind": "submit",
+      "disabled": false
+    }
+  ],
+  "prices": [],
+  "sections": [
+    {
+      "id": "s-1",
+      "heading": "Apply for QuickCred EMI",
+      "level": 1,
+      "text": "Tell us about yourself. It takes 2 minutes."
+    },
+    {
+      "id": "s-2",
+      "heading": "Bank details",
+      "level": 2,
+      "text": "We set up automatic repayments from this account."
+    }
+  ],
+  "legal_links": [
+    {
+      "id": "i-22",
+      "text": "Terms",
+      "href": "/demo/terms"
+    },
+    {
+      "id": "i-23",
+      "text": "Privacy Policy",
+      "href": "/demo/privacy"
+    }
+  ],
+  "cookie_banner": null,
+  "client_flags": [
+    {
+      "rule": "prechecked_marketing_consent",
+      "category": "shares_data",
+      "severity": "medium",
+      "element_ids": [
+        "i-19"
+      ],
+      "detail": "Marketing consent was ticked for you.",
+      "amount_inr": null,
+      "params": {}
+    }
+  ]
+}

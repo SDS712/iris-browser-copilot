@@ -1,0 +1,54 @@
+/* Transcript drawer. */
+.iris-transcript {
+  border-radius: 10px;
+  background: var(--iris-surface-muted);
+}
+
+.iris-transcript__toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 0;
+  background: none;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--iris-text-muted);
+  text-align: left;
+}
+
+.iris-transcript__toggle[aria-expanded='true'] .iris-transcript__chevron {
+  transform: rotate(90deg);
+}
+
+.iris-transcript__lines {
+  list-style: none;
+  margin: 0;
+  padding: 0 12px 12px;
+  max-height: 220px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.iris-transcript__line {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.iris-transcript__who {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--iris-text-muted);
+}
+
+.iris-transcript__line--live {
+  color: var(--iris-text-muted);
+}

@@ -1,0 +1,73 @@
+{
+  "contract_version": 1,
+  "url": "https://iris.example.com/demo/privacy",
+  "title": "QuickCred Privacy Policy",
+  "lang": "en",
+  "page_type_hint": "privacy",
+  "revision": 1,
+  "captured_at": "2026-09-26T05:30:00Z",
+  "truncated": false,
+  "fields": [],
+  "checkboxes": [],
+  "buttons": [],
+  "prices": [],
+  "sections": [
+    {
+      "id": "s-1",
+      "heading": "QuickCred Privacy Policy",
+      "level": 1,
+      "text": "Last updated: 1 September 2026. This policy explains what QuickCred collects about you, how we use it and who we share it with."
+    },
+    {
+      "id": "s-2",
+      "heading": "1 Who we are",
+      "level": 2,
+      "text": "QuickCred Finance Private Limited, 14 Example Lane, Pune 411001. Contact privacy@quickcred.example with any question about this policy."
+    },
+    {
+      "id": "s-3",
+      "heading": "2 What we collect",
+      "level": 2,
+      "text": "We collect identity details (name, PAN, date of birth), contact details, financial details (bank account, income), and device and app data, including your contact list, SMS metadata and precise location when you use our app."
+    },
+    {
+      "id": "s-4",
+      "heading": "3 How we use it",
+      "level": 2,
+      "text": "We use your information for credit decisions, collections, fraud prevention and personalised offers."
+    },
+    {
+      "id": "s-5",
+      "heading": "4 Who we share it with",
+      "level": 2,
+      "text": "We share your information with partners, affiliates, lenders, credit bureaus, collection agencies, marketing partners and service providers."
+    },
+    {
+      "id": "s-6",
+      "heading": "5 How long we keep it",
+      "level": 2,
+      "text": "We keep your information as long as necessary for our business purposes or as required by law."
+    },
+    {
+      "id": "s-7",
+      "heading": "6 Your choices",
+      "level": 2,
+      "text": "You can ask us to delete your data by emailing privacy@quickcred.example; we may keep some data where the law requires. You can opt out of marketing by replying STOP to any message."
+    },
+    {
+      "id": "s-8",
+      "heading": "7 Cookies",
+      "level": 2,
+      "text": "We use cookies as described in our cookie banner. You can change your cookie choices at any time under Manage choices."
+    },
+    {
+      "id": "s-9",
+      "heading": "8 Security",
+      "level": 2,
+      "text": "We use reasonable technical and organisational measures to protect your information."
+    }
+  ],
+  "legal_links": [],
+  "cookie_banner": null,
+  "client_flags": []
+}

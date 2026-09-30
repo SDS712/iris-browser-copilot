@@ -1,0 +1,58 @@
+{
+  "ifsc": {
+    "say": "IFSC is your bank branch's 11-character code, like SBIN0001234. It's on your cheque book or in your bank app.",
+    "rows": {
+      "What it is": "An 11-character code that identifies your bank branch.",
+      "Where to find it": "On your cheque book, your passbook or in your bank app.",
+      "Format": "4 letters, a zero, then 6 letters or numbers, like SBIN0001234.",
+      "Common mistake": "Typing the letter O instead of the zero in the fifth place."
+    },
+    "example": "SBIN0001234"
+  },
+  "pan": {
+    "say": "PAN is your 10-character tax ID, like ABCDE1234F. It's printed on your PAN card.",
+    "rows": {
+      "What it is": "Your Permanent Account Number, the tax ID from the Income Tax Department.",
+      "Where to find it": "On your PAN card, or on the income tax e-filing site.",
+      "Format": "5 letters, 4 numbers, 1 letter, like ABCDE1234F."
+    },
+    "example": "ABCDE1234F"
+  },
+  "ckyc": {
+    "say": "A CKYC number is your 14-digit central KYC ID, which saves you re-submitting documents. It's on your CKYC card or in a bank's KYC email.",
+    "rows": {
+      "What it is": "A 14-digit ID from India's central KYC registry.",
+      "Where to find it": "In a KYC confirmation SMS or email from a bank, or on the CKYC card.",
+      "Format": "14 digits, like 12345678901234.",
+      "Common mistake": "Entering your PAN or Aadhaar number instead."
+    },
+    "example": "12345678901234"
+  },
+  "mandate type": {
+    "say": "This asks how your EMIs will be collected: NACH, which is an auto-debit from your bank account, or UPI AutoPay. Either way, the money leaves automatically.",
+    "rows": {
+      "What it is": "The way the lender will collect your EMIs automatically.",
+      "Where to find it": "You choose it here; both options link to your bank account.",
+      "Format": "Pick one of the options, NACH e-mandate or UPI AutoPay."
+    },
+    "example": null
+  },
+  "gstin": {
+    "say": "GSTIN is a business's 15-character GST registration number, like 27ABCDE1234F1Z5. Leave it blank if you're buying as a person.",
+    "rows": {
+      "What it is": "A business's GST registration number.",
+      "Where to find it": "On the business's GST certificate or its invoices.",
+      "Format": "15 characters, like 27ABCDE1234F1Z5."
+    },
+    "example": "27ABCDE1234F1Z5"
+  },
+  "nominee": {
+    "say": "A nominee is the person who receives the money if something happens to you. You usually give their name and how they're related to you.",
+    "rows": {
+      "What it is": "The person who would receive the benefit on your behalf.",
+      "Where to find it": "Your choice; you'll need their full name and relationship to you.",
+      "Format": "Full name as on their ID."
+    },
+    "example": null
+  }
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iris voice picker</title>
+    <link rel="stylesheet" href="./harness.css" />
+  </head>
+  <body>
+    <main class="harness-page voices">
+      <h1>Voice listening test</h1>
+      <p>
+        Dev only; real sessions cost money. Pick a voice, press <strong>Talk to Iris</strong>, then
+        <strong>Read the test script</strong>. Score each voice 1–5 on warmth, clarity at normal
+        speed, rupee amounts and "lakh", acronyms (NACH, IFSC, GST, UPI), how "Heads up" sounds, and
+        how it sounds through laptop speakers. The voice is fixed once a session starts, so end the
+        session before trying the next one.
+      </p>
+      <label>
+        Voice
+        <select id="voice"></select>
+      </label>
+      <blockquote id="script"></blockquote>
+      <p><button type="button" id="read">Read the test script</button></p>
+    </main>
+    <div id="iris-harness-panel" class="harness-panel"></div>
+    <script type="module" src="./voices.tsx"></script>
+  </body>
+</html>

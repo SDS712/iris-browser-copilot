@@ -1,0 +1,546 @@
+{
+  "tool_results": {
+    "ask_page": {
+      "contract_version": 1,
+      "say": "The page says: You may cancel QuickCred Plus by giving 30 days' written notice to support@quickcred.example.",
+      "agent_notes": "",
+      "card": {
+        "topic": "Cancellation",
+        "source": "page",
+        "lead": "You may cancel QuickCred Plus by giving 30 days' written notice to support@quickcred.example.",
+        "kind": "answer",
+        "quote": {
+          "text": "You may cancel QuickCred Plus by giving 30 days' written notice to support@quickcred.example.",
+          "section_id": "s-19",
+          "section_heading": "7.2 Cancellation"
+        },
+        "risks": []
+      },
+      "highlight_ids": ["s-19"],
+      "quote_text": "You may cancel QuickCred Plus by giving 30 days' written notice to support@quickcred.example.",
+      "sources": [],
+      "not_found": false
+    },
+    "ask_not_found": {
+      "contract_version": 1,
+      "say": "The page doesn't mention that. Want me to look it up?",
+      "agent_notes": "",
+      "card": {
+        "topic": "Not on page",
+        "source": "not_found",
+        "lead": "The page doesn't mention this.",
+        "kind": "answer",
+        "quote": null,
+        "risks": []
+      },
+      "highlight_ids": [],
+      "quote_text": null,
+      "sources": [],
+      "not_found": true
+    },
+    "summarize": {
+      "contract_version": 1,
+      "say": "Here's the gist. Last updated: 1 September 2026. Want more detail?",
+      "agent_notes": "",
+      "card": {
+        "topic": "Summary",
+        "source": "page",
+        "lead": "Last updated: 1 September 2026. Loans up to ₹5,00,000.",
+        "kind": "summary",
+        "bullets": [
+          "Last updated: 1 September 2026.",
+          "Loans up to ₹5,00,000.",
+          "In this agreement, Borrower means the person named in the application who receives the…",
+          "The loan amount is paid directly to the merchant from whom the Borrower buys…",
+          "Interest is charged at 1.5% per month flat on the original principal for the…"
+        ]
+      },
+      "highlight_ids": [],
+      "quote_text": null,
+      "sources": [],
+      "not_found": false
+    },
+    "scan_tool": {
+      "contract_version": 1,
+      "say": "I found 3 things worth a look. The biggest: ₹1,299 add-on already ticked. Want me to go through them?",
+      "agent_notes": "₹1,299 add-on already ticked: 'Protect your purchase: QuickCred Shield ₹1,299/year' was ticked before you touched it.; Free trial turns into ₹199 a month: 'QuickCred Plus: free for 30 days, then ₹199/month' becomes paid after 30 days unless you cancel.; Cookie banner hides the reject option: The cookie banner offers to accept all, but has no visible reject button. The reject option may be under the manage settings.",
+      "card": {
+        "topic": "Things to know",
+        "source": "page",
+        "lead": "3 things worth a look (2 high).",
+        "kind": "risk_list",
+        "risks": [
+          {
+            "id": "r-1",
+            "key": "client_rule:prechecked_paid_addon:i-20",
+            "category": "costs_money",
+            "severity": "high",
+            "title": "₹1,299 add-on already ticked",
+            "detail": "'Protect your purchase: QuickCred Shield ₹1,299/year' was ticked before you touched it.",
+            "quote": null,
+            "section_id": null,
+            "element_ids": ["i-20"],
+            "amount_inr": 1299,
+            "origin": "client_rule"
+          },
+          {
+            "id": "r-2",
+            "key": "client_rule:trial_to_paid:i-21",
+            "category": "auto_renews",
+            "severity": "high",
+            "title": "Free trial turns into ₹199 a month",
+            "detail": "'QuickCred Plus: free for 30 days, then ₹199/month' becomes paid after 30 days unless you cancel.",
+            "quote": null,
+            "section_id": null,
+            "element_ids": ["i-21"],
+            "amount_inr": 199,
+            "origin": "client_rule"
+          },
+          {
+            "id": "r-3",
+            "key": "client_rule:hidden_cookie_reject:i-50",
+            "category": "worth_knowing",
+            "severity": "info",
+            "title": "Cookie banner hides the reject option",
+            "detail": "The cookie banner offers to accept all, but has no visible reject button. The reject option may be under the manage settings.",
+            "quote": null,
+            "section_id": null,
+            "element_ids": ["i-50"],
+            "amount_inr": null,
+            "origin": "client_rule"
+          }
+        ]
+      },
+      "highlight_ids": ["i-20", "i-21"],
+      "quote_text": null,
+      "sources": [],
+      "not_found": false
+    },
+    "explain_field": {
+      "contract_version": 1,
+      "say": "A CKYC number is your 14-digit central KYC ID, which saves you re-submitting documents. It's on your CKYC card or in a bank's KYC email.",
+      "agent_notes": "",
+      "card": {
+        "topic": "CKYC number",
+        "source": "web",
+        "lead": "A 14-digit ID from India's central KYC registry.",
+        "kind": "field",
+        "field_id": "i-16",
+        "rows": [
+          {
+            "label": "What it is",
+            "value": "A 14-digit ID from India's central KYC registry."
+          },
+          {
+            "label": "Where to find it",
+            "value": "In a KYC confirmation SMS or email from a bank, or on the CKYC card."
+          },
+          {
+            "label": "Format",
+            "value": "14 digits, like 12345678901234."
+          },
+          {
+            "label": "Common mistake",
+            "value": "Entering your PAN or Aadhaar number instead."
+          }
+        ],
+        "example": "12345678901234"
+      },
+      "highlight_ids": ["i-16"],
+      "quote_text": null,
+      "sources": [
+        {
+          "title": "What \"CKYC number meaning\" India form means",
+          "url": "https://example.org/guide/ckyc-number-meaning-india-form",
+          "domain": "example.org"
+        },
+        {
+          "title": "\"CKYC number meaning\" India form: questions and answers",
+          "url": "https://example.org/faq/ckyc-number-meaning-india-form",
+          "domain": "example.org"
+        }
+      ],
+      "not_found": false
+    },
+    "explain_field_page": {
+      "contract_version": 1,
+      "say": "IFSC is your bank branch's 11-character code, like SBIN0001234. It's on your cheque book or in your bank app.",
+      "agent_notes": "",
+      "card": {
+        "topic": "IFSC code",
+        "source": "web",
+        "lead": "An 11-character code that identifies your bank branch.",
+        "kind": "field",
+        "field_id": "i-15",
+        "rows": [
+          {
+            "label": "What it is",
+            "value": "An 11-character code that identifies your bank branch."
+          },
+          {
+            "label": "Where to find it",
+            "value": "On your cheque book, your passbook or in your bank app."
+          },
+          {
+            "label": "Format",
+            "value": "4 letters, a zero, then 6 letters or numbers, like SBIN0001234."
+          },
+          {
+            "label": "Common mistake",
+            "value": "Typing the letter O instead of the zero in the fifth place."
+          }
+        ],
+        "example": "SBIN0001234"
+      },
+      "highlight_ids": ["i-15"],
+      "quote_text": null,
+      "sources": [
+        {
+          "title": "What \"IFSC code meaning\" India form means",
+          "url": "https://example.org/guide/ifsc-code-meaning-india-form",
+          "domain": "example.org"
+        },
+        {
+          "title": "\"IFSC code meaning\" India form: questions and answers",
+          "url": "https://example.org/faq/ifsc-code-meaning-india-form",
+          "domain": "example.org"
+        }
+      ],
+      "not_found": false
+    },
+    "web_lookup": {
+      "contract_version": 1,
+      "say": "I looked it up. what is NACH is explained here in plain words. The sources are on the card.",
+      "agent_notes": "",
+      "card": {
+        "topic": "NACH",
+        "source": "web",
+        "lead": "what is NACH is explained here in plain words.",
+        "kind": "web_answer",
+        "bullets": [
+          "what is NACH is explained here in plain words.",
+          "Common questions about what is NACH, with short answers."
+        ]
+      },
+      "highlight_ids": [],
+      "quote_text": null,
+      "sources": [
+        {
+          "title": "What what is NACH means",
+          "url": "https://example.org/guide/what-is-nach",
+          "domain": "example.org"
+        },
+        {
+          "title": "what is NACH: questions and answers",
+          "url": "https://example.org/faq/what-is-nach",
+          "domain": "example.org"
+        }
+      ],
+      "not_found": false
+    },
+    "loan_cost": {
+      "contract_version": 1,
+      "say": "'1.5% a month flat' works out to about 36.5% a year, because interest is charged on the full amount even as you pay it back. The card shows the maths.",
+      "agent_notes": "EMI ₹5,899.90; interest ₹10,799.82; total of instalments ₹70,798.82; fees upfront ₹1,416; nominal yearly rate 36.5%; effective yearly rate 43.3%.",
+      "card": {
+        "topic": "True cost of offer",
+        "source": "calculated",
+        "lead": "1.5% a month flat works out to about 36.5% a year once the fees are counted. The EMI is ₹5,900 for 12 months.",
+        "kind": "true_cost",
+        "figure_text": "≈ 36.5% a year",
+        "apr_percent": 36.5,
+        "effective_annual_percent": 43.3,
+        "advertised": "1.5% a month flat",
+        "emi_inr": 5900,
+        "tenure_months": 12,
+        "total_paid_inr": 70799,
+        "fees_upfront_inr": 1416,
+        "extra_over_price_inr": 12216,
+        "explanation": [
+          "Interest is charged on the full ₹59,999 for all 12 months, even as you pay it back.",
+          "You pay ₹70,799 in instalments plus ₹1,416 in fees upfront: ₹12,216 on top of ₹59,999."
+        ]
+      },
+      "highlight_ids": [],
+      "quote_text": null,
+      "sources": [],
+      "not_found": false
+    },
+    "site_trust": {
+      "contract_version": 1,
+      "say": "This address looks a lot like amazon.in, but it isn't the official site, so it's likely unsafe. Want the details?",
+      "agent_notes": "Looks a lot like amazon.in; Domain registered 3 days ago; No scam reports found",
+      "card": {
+        "topic": "Site check",
+        "source": "web",
+        "lead": "Likely unsafe. Looks a lot like amazon.in; Domain registered 3 days ago.",
+        "kind": "trust",
+        "verdict": "likely_unsafe",
+        "domain": "arnazon.in",
+        "reasons": [
+          {
+            "text": "Looks a lot like amazon.in",
+            "level": "bad"
+          },
+          {
+            "text": "Domain registered 3 days ago",
+            "level": "bad"
+          },
+          {
+            "text": "No scam reports found",
+            "level": "good"
+          }
+        ],
+        "checks_line": "Checks: domain age, look-alike names, public reports."
+      },
+      "highlight_ids": [],
+      "quote_text": null,
+      "sources": [],
+      "not_found": false
+    },
+    "site_trust_ok": {
+      "contract_version": 1,
+      "say": "This looks like the official hdfcbank.com site, and I didn't find any scam reports. Want the details?",
+      "agent_notes": "Matches the official hdfcbank.com domain; Registered 10 years ago; No scam reports found",
+      "card": {
+        "topic": "Site check",
+        "source": "web",
+        "lead": "Looks OK. Everything I checked looks normal.",
+        "kind": "trust",
+        "verdict": "looks_ok",
+        "domain": "hdfcbank.com",
+        "reasons": [
+          {
+            "text": "Matches the official hdfcbank.com domain",
+            "level": "good"
+          },
+          {
+            "text": "Registered 10 years ago",
+            "level": "good"
+          },
+          {
+            "text": "No scam reports found",
+            "level": "good"
+          }
+        ],
+        "checks_line": "Checks: domain age, look-alike names, public reports."
+      },
+      "highlight_ids": [],
+      "quote_text": null,
+      "sources": [],
+      "not_found": false
+    }
+  },
+  "scans": {
+    "terms": {
+      "contract_version": 1,
+      "page_id": "pg_Vv_Jurcly4Su40D7",
+      "status": "ready",
+      "kind": "terms",
+      "risks": [
+        {
+          "id": "r-1",
+          "key": "page_text:auto_debit:s-8",
+          "category": "auto_debit",
+          "severity": "high",
+          "title": "Repayments are auto-debited",
+          "detail": "Payments are collected automatically from your bank account.",
+          "quote": "EMIs are collected automatically on the 5th of every month through the NACH e-mandate or UPI AutoPay set up at application.",
+          "section_id": "s-8",
+          "element_ids": [],
+          "amount_inr": null,
+          "origin": "page_text"
+        },
+        {
+          "id": "r-2",
+          "key": "page_text:costs_money:s-15",
+          "category": "costs_money",
+          "severity": "medium",
+          "title": "Fee to repay early",
+          "detail": "Closing the loan early costs extra.",
+          "quote": "No foreclosure is allowed in the first 3 months from the date of disbursal.",
+          "section_id": "s-15",
+          "element_ids": [],
+          "amount_inr": null,
+          "origin": "page_text"
+        },
+        {
+          "id": "r-3",
+          "key": "page_text:costs_money:s-11",
+          "category": "costs_money",
+          "severity": "medium",
+          "title": "Charges for late or failed payments",
+          "detail": "Missed or failed payments add charges.",
+          "quote": "A late fee of ₹500 is charged for each missed instalment, in addition to the instalment itself.",
+          "section_id": "s-11",
+          "element_ids": [],
+          "amount_inr": 500,
+          "origin": "page_text"
+        },
+        {
+          "id": "r-4",
+          "key": "page_text:limits_rights:s-26",
+          "category": "limits_rights",
+          "severity": "medium",
+          "title": "Disputes go to arbitration",
+          "detail": "Disputes are decided by an arbitrator instead of a court.",
+          "quote": "All disputes arising under this agreement go to arbitration by a sole arbitrator appointed by QuickCred.",
+          "section_id": "s-26",
+          "element_ids": [],
+          "amount_inr": null,
+          "origin": "page_text"
+        },
+        {
+          "id": "r-5",
+          "key": "page_text:shares_data:s-24",
+          "category": "shares_data",
+          "severity": "medium",
+          "title": "Shares your data with partners",
+          "detail": "Your information can be shared with partners and affiliates.",
+          "quote": "The Borrower consents to QuickCred sharing their information with partners, affiliates, credit bureaus and service providers, including for marketing.",
+          "section_id": "s-24",
+          "element_ids": [],
+          "amount_inr": null,
+          "origin": "page_text"
+        },
+        {
+          "id": "r-6",
+          "key": "page_text:auto_renews:s-18",
+          "category": "auto_renews",
+          "severity": "medium",
+          "title": "Renews automatically",
+          "detail": "A plan renews on its own unless you cancel.",
+          "quote": "It is added at checkout and renews monthly until cancelled, with each monthly fee charged through the mandate.",
+          "section_id": "s-18",
+          "element_ids": [],
+          "amount_inr": null,
+          "origin": "page_text"
+        },
+        {
+          "id": "r-7",
+          "key": "page_text:hard_to_cancel:s-19",
+          "category": "hard_to_cancel",
+          "severity": "medium",
+          "title": "Cancelling needs notice",
+          "detail": "You have to give notice before you can cancel.",
+          "quote": "You may cancel QuickCred Plus by giving 30 days' written notice to support@quickcred.example.",
+          "section_id": "s-19",
+          "element_ids": [],
+          "amount_inr": null,
+          "origin": "page_text"
+        }
+      ],
+      "counts": {
+        "high": 1,
+        "medium": 6,
+        "info": 0
+      },
+      "nudge": {
+        "say": "Before you agree: this sets up an auto-debit from your bank account, and there's a fee if you repay early. Want the details?",
+        "risk_ids": ["r-1", "r-2"],
+        "risk_keys": ["page_text:auto_debit:s-8", "page_text:costs_money:s-15"],
+        "highlight_ids": ["s-8", "s-15"]
+      }
+    },
+    "checkout": {
+      "contract_version": 1,
+      "page_id": "pg_488_pJDCecQf_DKx",
+      "status": "ready",
+      "kind": "checkout",
+      "risks": [
+        {
+          "id": "r-1",
+          "key": "client_rule:prechecked_paid_addon:i-20",
+          "category": "costs_money",
+          "severity": "high",
+          "title": "₹1,299 add-on already ticked",
+          "detail": "'Protect your purchase: QuickCred Shield ₹1,299/year' was ticked before you touched it.",
+          "quote": null,
+          "section_id": null,
+          "element_ids": ["i-20"],
+          "amount_inr": 1299,
+          "origin": "client_rule"
+        },
+        {
+          "id": "r-2",
+          "key": "client_rule:trial_to_paid:i-21",
+          "category": "auto_renews",
+          "severity": "high",
+          "title": "Free trial turns into ₹199 a month",
+          "detail": "'QuickCred Plus: free for 30 days, then ₹199/month' becomes paid after 30 days unless you cancel.",
+          "quote": null,
+          "section_id": null,
+          "element_ids": ["i-21"],
+          "amount_inr": 199,
+          "origin": "client_rule"
+        },
+        {
+          "id": "r-3",
+          "key": "client_rule:hidden_cookie_reject:i-50",
+          "category": "worth_knowing",
+          "severity": "info",
+          "title": "Cookie banner hides the reject option",
+          "detail": "The cookie banner offers to accept all, but has no visible reject button. The reject option may be under the manage settings.",
+          "quote": null,
+          "section_id": null,
+          "element_ids": ["i-50"],
+          "amount_inr": null,
+          "origin": "client_rule"
+        }
+      ],
+      "counts": {
+        "high": 2,
+        "medium": 0,
+        "info": 1
+      },
+      "nudge": {
+        "say": "Before you pay: a ₹1,299 add-on is already ticked, and the free trial becomes ₹199 a month after 30 days. Want the details?",
+        "risk_ids": ["r-1", "r-2"],
+        "risk_keys": ["client_rule:prechecked_paid_addon:i-20", "client_rule:trial_to_paid:i-21"],
+        "highlight_ids": ["i-20", "i-21"]
+      }
+    }
+  },
+  "pages": {
+    "terms": {
+      "page_type": "terms",
+      "summary_for_agent": "PAGE: QuickCred Loan Agreement: Terms and Conditions (type: terms)\nURL: https://iris.example.com/demo/terms\nFIELDS: none\nCHOICES: none\nPRICES: none\nSECTIONS: s-1 \"QuickCred Loan Agreement: Terms and Conditions\"; s-2 \"Key terms\"; s-3 \"1 Definitions\"; s-4 \"2 Loan and disbursal\"; s-5 \"3.1 Interest\"; s-6 \"3.2 Processing fee\"; s-7 \"3.3 Changes to the interest rate\"; s-8 \"4.1 Collection of EMIs\"; s-9 \"4.2 Recovery of overdue amounts\"; s-10 \"4.3 Mandate cancellation\"; s-11 \"5.1 Late fee\"; s-12 \"5.2 Bounce charge\"; s-13 \"5.3 Overdue interest\"; s-14 \"5.4 Credit reporting\"; s-15 \"6.1 Foreclosure lock-in\"; s-16 \"6.2 Foreclosure charge\"; s-17 \"6.3 Part-prepayment\"; s-18 \"7.1 QuickCred Plus membership\"; s-19 \"7.2 Cancellation\"; s-20 \"7.3 Refunds\"; s-21 \"8.1 QuickCred Shield\"; s-22 \"8.2 Shield renewal\"; s-23 \"8.3 Shield claims\"; s-24 \"9.1 Sharing your information\"; s-25 \"9.2 Calls and messages\"; s-26 \"10.1 Arbitration\"; s-27 \"10.2 Seat of arbitration\"; s-28 \"10.3 Class actions\"; s-29 \"11 Changes to these terms\"; s-30 \"12 Grievances\"\nLEGAL LINKS: i-2 \"Privacy Policy\"\nCOOKIE BANNER: none\nFLAGS: none",
+      "scan": {
+        "status": "pending",
+        "kind": "terms"
+      }
+    },
+    "checkout": {
+      "page_type": "checkout",
+      "summary_for_agent": "PAGE: Checkout – QuickCred example (type: checkout)\nURL: https://iris.example.com/demo/checkout\nFIELDS: none\nCHOICES: i-20 \"Protect your purchase: QuickCred Shield ₹1,299/year\" [pre-checked]; i-21 \"QuickCred Plus: free for 30 days, then ₹199/month\" [pre-checked]; i-22 \"Extended warranty (2 years) ₹2,499\"\nPRICES: i-31 \"Nimbus 14 laptop\" ₹59,999; i-32 \"QuickCred Shield\" ₹1,299; i-33 \"Due today\" ₹1,299\nSECTIONS: s-1 \"Your order\"; s-2 \"Review & pay\"\nLEGAL LINKS: i-40 \"Terms\"; i-41 \"Privacy\"\nCOOKIE BANNER: yes (reject hidden)\nFLAGS: prechecked_paid_addon i-20 (high); trial_to_paid i-21 (high); hidden_cookie_reject i-50 (info)",
+      "scan": {
+        "status": "pending",
+        "kind": "checkout"
+      }
+    },
+    "offer": {
+      "page_type": "offer",
+      "summary_for_agent": "PAGE: QuickCred – Own the Nimbus 14 today (type: offer)\nURL: https://iris.example.com/demo/\nFIELDS: none\nCHOICES: none\nPRICES: i-3 \"Nimbus 14 laptop\" ₹59,999; i-4 \"Monthly instalment\" ₹5,900/month\nSECTIONS: s-1 \"Own the Nimbus 14 today.\"; s-2; s-3 \"Why QuickCred\"\nLEGAL LINKS: i-8 \"Terms\"\nCOOKIE BANNER: none\nFLAGS: flat_rate_offer s-2 (medium); countdown_timer i-6 (info)",
+      "scan": {
+        "status": "pending",
+        "kind": "offer"
+      }
+    },
+    "form": {
+      "page_type": "form",
+      "summary_for_agent": "PAGE: Apply for QuickCred EMI (type: form)\nURL: https://iris.example.com/demo/apply\nFIELDS: i-10 \"Full name (as on PAN)\" [required]; i-11 \"PAN\" [required]; i-12 \"Date of birth\" [required]; i-13 \"Mobile number\" [required]; i-14 \"Bank account number\" [sensitive] [required]; i-15 \"IFSC code\" [required]; i-16 \"CKYC number\"; i-17 \"Mandate type\" [required]; i-18 \"OTP\" [sensitive] [required]\nCHOICES: i-19 \"Send me offers from QuickCred and partners on WhatsApp and SMS\" [pre-checked]; i-20 \"I agree to the Terms and the Privacy Policy\"\nPRICES: none\nSECTIONS: s-1 \"Apply for QuickCred EMI\"; s-2 \"Bank details\"\nLEGAL LINKS: i-22 \"Terms\"; i-23 \"Privacy Policy\"\nCOOKIE BANNER: none\nFLAGS: prechecked_marketing_consent i-19 (medium)",
+      "scan": {
+        "status": "ready",
+        "kind": "general"
+      }
+    },
+    "privacy": {
+      "page_type": "privacy",
+      "summary_for_agent": "PAGE: QuickCred Privacy Policy (type: privacy)\nURL: https://iris.example.com/demo/privacy\nFIELDS: none\nCHOICES: none\nPRICES: none\nSECTIONS: s-1 \"QuickCred Privacy Policy\"; s-2 \"1 Who we are\"; s-3 \"2 What we collect\"; s-4 \"3 How we use it\"; s-5 \"4 Who we share it with\"; s-6 \"5 How long we keep it\"; s-7 \"6 Your choices\"; s-8 \"7 Cookies\"; s-9 \"8 Security\"\nLEGAL LINKS: none\nCOOKIE BANNER: none\nFLAGS: none",
+      "scan": {
+        "status": "pending",
+        "kind": "privacy"
+      }
+    }
+  }
+}

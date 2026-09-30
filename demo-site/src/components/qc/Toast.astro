@@ -1,0 +1,23 @@
+---
+/** A polite live region for the demo's messages; filled by scripts/toast.ts. */
+---
+
+<div class="toast" id="qc-toast" role="status" aria-live="polite" hidden></div>
+
+<style>
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 96px;
+    z-index: 1100;
+    transform: translateX(-50%);
+    max-width: calc(100% - 32px);
+    padding: 12px 20px;
+    border-radius: var(--qc-radius-input);
+    background: #111827;
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 22px;
+    box-shadow: 0 8px 24px rgba(17, 24, 39, 0.24);
+  }
+</style>

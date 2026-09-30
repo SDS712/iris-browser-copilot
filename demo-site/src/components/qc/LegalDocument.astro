@@ -1,0 +1,100 @@
+---
+/**
+ * A long legal document: the title, "Last updated", an introduction,
+ * an optional summary box, then numbered <h2> sections and <h3> clauses from Markdown, with
+ * a sticky table of contents on wide screens.
+ */
+import { getEntry, render } from 'astro:content';
+import Toc from './Toc.astro';
+
+interface Props {
+  id: 'terms' | 'privacy';
+}
+const entry = await getEntry('legal', Astro.props.id);
+if (!entry) throw new Error(`Missing legal document: ${Astro.props.id}`);
+const { Content, headings } = await render(entry);
+const { title, updated, intro } = entry.data;
+---
+
+<div class="container legal">
+  <article class="legal__doc">
+    <h1 class="qc-page-title">{title}</h1>
+    <p class="legal__updated">Last updated: {updated}</p>
+    <p>{intro}</p>
+    <slot name="summary" />
+    <div class="legal__body">
+      <Content />
+    </div>
+  </article>
+  <!-- After the text in the source (shown on the left), so the document is read first. -->
+  <aside class="legal__aside">
+    <Toc headings={headings} />
+  </aside>
+</div>
+
+<style>
+  .legal {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 48px;
+    padding-top: 48px;
+  }
+
+  .legal__doc {
+    grid-column: 2;
+    grid-row: 1;
+    max-width: 760px;
+  }
+
+  .legal__aside {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .legal__updated {
+    margin: 8px 0 24px;
+    color: var(--qc-muted);
+    font-size: 14px;
+  }
+
+  .legal__body :global(h2) {
+    margin: 40px 0 12px;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
+    scroll-margin-top: 56px;
+  }
+
+  .legal__body :global(h3) {
+    margin: 24px 0 8px;
+    font-size: 17px;
+    line-height: 26px;
+    font-weight: 600;
+    scroll-margin-top: 56px;
+  }
+
+  .legal__body :global(p),
+  .legal__body :global(li) {
+    color: #1f2937;
+  }
+
+  .legal__body :global(ul) {
+    padding-left: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .legal {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding-top: 32px;
+    }
+
+    .legal__doc {
+      grid-column: 1;
+    }
+
+    .legal__aside {
+      display: none;
+    }
+  }
+</style>

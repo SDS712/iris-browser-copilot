@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Iris">
+  <defs>
+    <radialGradient id="iris-disc" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0F766E"/>
+      <stop offset="62%" stop-color="#0F766E"/>
+      <stop offset="100%" stop-color="#7CCFC2"/>
+    </radialGradient>
+  </defs>
+  <circle cx="64" cy="64" r="62" fill="url(#iris-disc)"/>
+  <circle cx="64" cy="64" r="26" fill="none" stroke="#0B4A46" stroke-width="14"/>
+  <circle cx="64" cy="64" r="12" fill="#0B4A46"/>
+</svg>

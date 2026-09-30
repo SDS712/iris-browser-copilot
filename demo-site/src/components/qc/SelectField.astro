@@ -1,0 +1,43 @@
+---
+/** A labelled <select> with a "Choose one" prompt, so an untouched select counts as empty. */
+interface Props {
+  id: string;
+  label: string;
+  options: readonly string[];
+  required?: boolean;
+}
+const { id, label, options, required = false } = Astro.props;
+---
+
+<div class="field">
+  <label for={id}>{label}</label>
+  <select id={id} name={id} required={required}>
+    <option value="" selected disabled>
+      Choose one
+    </option>
+    {options.map((option) => (
+      <option>{option}</option>
+    ))}
+  </select>
+</div>
+
+<style>
+  .field {
+    display: grid;
+    gap: 6px;
+  }
+
+  label {
+    font-size: 15px;
+    line-height: 22px;
+    font-weight: 600;
+  }
+
+  select {
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #9ca3af;
+    border-radius: var(--qc-radius-input);
+    background: #ffffff;
+  }
+</style>

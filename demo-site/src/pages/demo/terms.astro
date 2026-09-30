@@ -1,0 +1,46 @@
+---
+/**
+ * The loan agreement. The "Key terms" box mentions only the friendly parts; the
+ * full text, with every charge and condition, follows in numbered clauses.
+ */
+import LegalDocument from '../../components/qc/LegalDocument.astro';
+import QuickCredLayout from '../../layouts/QuickCredLayout.astro';
+---
+
+<QuickCredLayout title="QuickCred Loan Agreement: Terms and Conditions">
+  <LegalDocument id="terms">
+    <section class="key-terms qc-soft" slot="summary" aria-labelledby="key-terms">
+      <h2 class="qc-section-title" id="key-terms">
+        Key terms
+      </h2>
+      <ul>
+        <li>Loans up to ₹5,00,000</li>
+        <li>Interest 1.5% p.m. flat</li>
+        <li>Tenures from 3 to 24 months</li>
+        <li>Easy automatic repayments</li>
+      </ul>
+    </section>
+  </LegalDocument>
+</QuickCredLayout>
+
+<style>
+  .key-terms {
+    margin: 8px 0 16px;
+    padding: 20px 24px;
+    border-radius: var(--qc-radius-card);
+  }
+
+  .key-terms ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 24px;
+    margin: 12px 0 0;
+    padding-left: 20px;
+  }
+
+  @media (max-width: 640px) {
+    .key-terms ul {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

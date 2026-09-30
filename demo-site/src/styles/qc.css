@@ -1,0 +1,135 @@
+/* QuickCred page styles: type scale, buttons and cards. */
+body {
+  font-family: var(--qc-font);
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--qc-ink);
+  background: var(--qc-bg);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: var(--qc-ink);
+}
+
+.qc-hero-title {
+  font-size: 44px;
+  line-height: 52px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.qc-page-title {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.qc-section-title {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+}
+
+.qc-fine {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--qc-muted);
+}
+
+a {
+  color: var(--qc-primary);
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--qc-primary-hover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--qc-primary);
+  outline-offset: 2px;
+}
+
+.qc-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 1px solid transparent;
+  border-radius: var(--qc-radius-input);
+  background: var(--qc-primary);
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.qc-button:hover {
+  background: var(--qc-primary-hover);
+  color: #ffffff;
+}
+
+.qc-button--large {
+  min-height: 52px;
+  padding: 12px 28px;
+  font-size: 17px;
+}
+
+.qc-button--quiet {
+  background: #ffffff;
+  border-color: var(--qc-border);
+  color: var(--qc-ink);
+}
+
+.qc-button--quiet:hover {
+  background: var(--qc-bg-soft);
+  color: var(--qc-ink);
+}
+
+.qc-card {
+  background: #ffffff;
+  border: 1px solid var(--qc-border);
+  border-radius: var(--qc-radius-card);
+  box-shadow: var(--qc-shadow);
+  padding: 24px;
+}
+
+.qc-soft {
+  background: var(--qc-bg-soft);
+}
+
+.qc-soft .qc-fine,
+.qc-soft .qc-secondary {
+  color: var(--qc-muted-on-soft);
+}
+
+.qc-secondary {
+  color: var(--qc-muted);
+}
+
+.qc-badge {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--qc-success-tint);
+  color: var(--qc-success-ink);
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 600;
+}
+
+.qc-badge svg {
+  width: 16px;
+  height: 16px;
+  color: var(--qc-success);
+}

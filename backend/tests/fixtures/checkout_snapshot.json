@@ -1,0 +1,148 @@
+{
+  "contract_version": 1,
+  "url": "https://iris.example.com/demo/checkout",
+  "title": "Checkout – QuickCred example",
+  "lang": "en",
+  "page_type_hint": "checkout",
+  "revision": 1,
+  "captured_at": "2026-09-26T05:30:00Z",
+  "truncated": false,
+  "fields": [],
+  "checkboxes": [
+    {
+      "id": "i-20",
+      "label": "Protect your purchase: QuickCred Shield ₹1,299/year",
+      "kind": "checkbox",
+      "group": "Add-ons",
+      "checked": true,
+      "prechecked": true,
+      "amount_inr": 1299,
+      "first_seen_revision": 1
+    },
+    {
+      "id": "i-21",
+      "label": "QuickCred Plus: free for 30 days, then ₹199/month",
+      "kind": "checkbox",
+      "group": "Add-ons",
+      "checked": true,
+      "prechecked": true,
+      "amount_inr": 199,
+      "first_seen_revision": 1
+    },
+    {
+      "id": "i-22",
+      "label": "Extended warranty (2 years) ₹2,499",
+      "kind": "checkbox",
+      "group": "Add-ons",
+      "checked": false,
+      "prechecked": false,
+      "amount_inr": 2499,
+      "first_seen_revision": 1
+    }
+  ],
+  "buttons": [
+    {
+      "id": "i-30",
+      "text": "Continue",
+      "kind": "submit",
+      "disabled": false
+    }
+  ],
+  "prices": [
+    {
+      "id": "i-31",
+      "label": "Nimbus 14 laptop",
+      "amount_text": "₹59,999",
+      "amount_inr": 59999,
+      "first_seen_revision": 1
+    },
+    {
+      "id": "i-32",
+      "label": "QuickCred Shield",
+      "amount_text": "₹1,299",
+      "amount_inr": 1299,
+      "first_seen_revision": 1
+    },
+    {
+      "id": "i-33",
+      "label": "Due today",
+      "amount_text": "₹1,299",
+      "amount_inr": 1299,
+      "first_seen_revision": 1
+    }
+  ],
+  "sections": [
+    {
+      "id": "s-1",
+      "heading": "Your order",
+      "level": 2,
+      "text": "Nimbus 14 laptop ₹59,999. Paid with QuickCred EMI: ₹5,900/month × 12."
+    },
+    {
+      "id": "s-2",
+      "heading": "Review & pay",
+      "level": 2,
+      "text": "Check your add-ons before you continue. Due today ₹1,299."
+    }
+  ],
+  "legal_links": [
+    {
+      "id": "i-40",
+      "text": "Terms",
+      "href": "/demo/terms"
+    },
+    {
+      "id": "i-41",
+      "text": "Privacy",
+      "href": "/demo/privacy"
+    }
+  ],
+  "cookie_banner": {
+    "id": "i-50",
+    "accept_button_id": "i-51",
+    "reject_button_id": null,
+    "manage_button_id": "i-52",
+    "reject_visible": false
+  },
+  "client_flags": [
+    {
+      "rule": "prechecked_paid_addon",
+      "category": "costs_money",
+      "severity": "high",
+      "element_ids": [
+        "i-20"
+      ],
+      "detail": "A paid add-on was ticked before you touched it.",
+      "amount_inr": 1299,
+      "params": {
+        "period": "year"
+      }
+    },
+    {
+      "rule": "trial_to_paid",
+      "category": "auto_renews",
+      "severity": "high",
+      "element_ids": [
+        "i-21"
+      ],
+      "detail": "A free trial turns into a paid plan.",
+      "amount_inr": 199,
+      "params": {
+        "trial_days": 30,
+        "then_inr": 199,
+        "then_period": "month"
+      }
+    },
+    {
+      "rule": "hidden_cookie_reject",
+      "category": "worth_knowing",
+      "severity": "info",
+      "element_ids": [
+        "i-50"
+      ],
+      "detail": "The cookie banner has no visible reject button.",
+      "amount_inr": null,
+      "params": {}
+    }
+  ]
+}

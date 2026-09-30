@@ -1,0 +1,105 @@
+/* The Iris landing page: Inter, teal accent, light only. */
+body {
+  font-family: var(--iris-font);
+  font-size: 17px;
+  line-height: 28px;
+  color: var(--iris-text);
+  background: var(--iris-bg);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: var(--iris-text);
+}
+
+.iris-hero-title {
+  font-size: 48px;
+  line-height: 56px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.iris-section-title {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+.iris-muted {
+  color: var(--iris-text-muted);
+}
+
+a {
+  color: var(--iris-accent);
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--iris-accent-hover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--iris-accent);
+  outline-offset: 2px;
+}
+
+.iris-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 22px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: var(--iris-accent);
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.iris-button:hover {
+  background: var(--iris-accent-hover);
+  color: #ffffff;
+}
+
+.iris-button--quiet {
+  background: var(--iris-surface);
+  border-color: var(--iris-border);
+  color: var(--iris-text);
+}
+
+.iris-button--quiet:hover {
+  background: var(--iris-accent-soft);
+  color: var(--iris-accent-ink);
+}
+
+.iris-card {
+  background: var(--iris-surface);
+  border: 1px solid var(--iris-border);
+  border-radius: 12px;
+  box-shadow:
+    0 1px 2px rgba(16, 24, 23, 0.06),
+    0 4px 12px rgba(16, 24, 23, 0.06);
+  padding: 24px;
+}
+
+/* Element-qualified, so it wins over .container's `margin: 0 auto` whatever the CSS order. */
+section.iris-section,
+div.iris-section {
+  margin-top: 72px;
+}
+
+@media (max-width: 640px) {
+  .iris-hero-title {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  section.iris-section,
+  div.iris-section {
+    margin-top: 56px;
+  }
+}

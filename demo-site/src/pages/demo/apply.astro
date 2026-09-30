@@ -1,0 +1,166 @@
+---
+/**
+ * The application form: three steps on one page. Helper text appears only where
+ * the spec gives it, never under IFSC, mandate type or CKYC. Traps: confusing fields, a
+ * pre-ticked partner-offers box, and terms links just above the submit button.
+ */
+import { BRAND } from '../../brand';
+import Checkbox from '../../components/qc/Checkbox.astro';
+import FormField from '../../components/qc/FormField.astro';
+import RadioGroup from '../../components/qc/RadioGroup.astro';
+import SelectField from '../../components/qc/SelectField.astro';
+import Stepper from '../../components/qc/Stepper.astro';
+import QuickCredLayout from '../../layouts/QuickCredLayout.astro';
+---
+
+<QuickCredLayout title={`Apply for ${BRAND.company} EMI`}>
+  <div class="container apply">
+    <h1 class="qc-page-title">Apply for your {BRAND.product} EMI</h1>
+    <Stepper steps={['Details', 'Bank', 'Review']} />
+
+    <form id="application" class="apply__form" novalidate>
+      <section class="qc-card step" aria-labelledby="step-details">
+        <h2 class="qc-section-title" id="step-details">
+          1 Details
+        </h2>
+        <div class="grid">
+          <FormField id="full-name" label="Full name (as per PAN)" required autocomplete="name" />
+          <FormField
+            id="pan"
+            label="PAN"
+            required
+            placeholder="ABCDE1234F"
+            help="10 characters, as printed on your PAN card"
+          />
+          <FormField id="dob" label="Date of birth" type="date" required autocomplete="bday" />
+          <FormField id="mobile" label="Mobile number" type="tel" required autocomplete="tel">
+            <button slot="after" type="button" class="qc-button qc-button--quiet" id="send-otp">
+              Send OTP
+            </button>
+          </FormField>
+          <FormField id="otp" label="OTP" autocomplete="one-time-code" inputmode="numeric" />
+          <FormField id="email" label="Email" type="email" autocomplete="email" />
+          <SelectField
+            id="employment"
+            label="Employment type"
+            options={['Salaried', 'Self-employed', 'Student', 'Retired']}
+          />
+          <FormField
+            id="income"
+            label="Monthly in-hand income"
+            type="number"
+            inputmode="numeric"
+            help="After tax and deductions"
+          />
+        </div>
+      </section>
+
+      <section class="qc-card step" aria-labelledby="step-bank">
+        <h2 class="qc-section-title" id="step-bank">
+          2 Bank
+        </h2>
+        <div class="grid">
+          <FormField id="account-number" label="Bank account number" required inputmode="numeric" />
+          <FormField id="ifsc" label="IFSC" required placeholder="e.g. ABCD0123456" />
+          <RadioGroup
+            name="mandate-type"
+            legend="Mandate type"
+            options={['NACH e-mandate', 'UPI AutoPay']}
+            required
+          />
+          <FormField id="ckyc" label="CKYC number (optional)" />
+        </div>
+      </section>
+
+      <section class="qc-card step" aria-labelledby="step-review">
+        <h2 class="qc-section-title" id="step-review">
+          3 Review
+        </h2>
+        <div class="grid">
+          <FormField id="nominee-name" label="Nominee name" />
+          <SelectField
+            id="nominee-relationship"
+            label="Nominee relationship"
+            options={['Spouse', 'Parent', 'Child', 'Sibling', 'Other']}
+          />
+          <FormField id="gstin" label="GSTIN (optional, if self-employed)" />
+        </div>
+        <div class="consents">
+          <Checkbox id="partner-offers" checked>
+            Send me offers from {BRAND.company} and partners on WhatsApp and SMS
+          </Checkbox>
+          <Checkbox id="agree" required>
+            I agree to the <a href="/demo/terms">Terms</a> and the{' '}
+            <a href="/demo/privacy">Privacy Policy</a>
+          </Checkbox>
+        </div>
+        <div class="submit">
+          <button type="submit" class="qc-button qc-button--large">
+            Submit application
+          </button>
+          <a class="qc-button qc-button--quiet" href="/demo/checkout" id="continue-link" hidden>
+            Continue to checkout
+          </a>
+        </div>
+      </section>
+    </form>
+  </div>
+</QuickCredLayout>
+
+<script>
+  import { DEMO_TOAST, showToast } from '../../scripts/toast';
+
+  document.getElementById('send-otp')?.addEventListener('click', () => {
+    showToast('Demo: no OTP is sent.');
+  });
+  document.getElementById('application')?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    showToast(DEMO_TOAST);
+    const next = document.getElementById('continue-link');
+    if (next) next.hidden = false;
+  });
+</script>
+
+<style>
+  .apply {
+    display: grid;
+    gap: 24px;
+    padding-top: 40px;
+    max-width: 880px;
+  }
+
+  .apply__form {
+    display: grid;
+    gap: 24px;
+  }
+
+  .step {
+    display: grid;
+    gap: 20px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 24px;
+    align-items: start;
+  }
+
+  .consents {
+    display: grid;
+    gap: 12px;
+  }
+
+  .submit {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+
+  @media (max-width: 720px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

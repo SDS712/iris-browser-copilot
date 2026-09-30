@@ -1,0 +1,97 @@
+---
+/** A labelled input with optional helper text (<label for>, aria-describedby). */
+interface Props {
+  id: string;
+  label: string;
+  type?: 'text' | 'email' | 'tel' | 'number' | 'date';
+  required?: boolean;
+  placeholder?: string;
+  help?: string;
+  autocomplete?: string;
+  inputmode?: 'text' | 'numeric' | 'tel' | 'email';
+}
+const {
+  id,
+  label,
+  type = 'text',
+  required = false,
+  placeholder,
+  help,
+  autocomplete,
+  inputmode,
+} = Astro.props;
+const helpId = help ? `${id}-help` : undefined;
+---
+
+<div class="field">
+  <label for={id}>
+    {label}
+    {required && (
+      <span class="field__required" aria-hidden="true">
+        {' '}
+        *
+      </span>
+    )}
+  </label>
+  <div class="field__control">
+    <input
+      id={id}
+      name={id}
+      type={type}
+      required={required}
+      placeholder={placeholder}
+      autocomplete={autocomplete}
+      inputmode={inputmode}
+      aria-describedby={helpId}
+    />
+    <slot name="after" />
+  </div>
+  {help && (
+    <p id={helpId} class="field__help">
+      {help}
+    </p>
+  )}
+</div>
+
+<style>
+  .field {
+    display: grid;
+    gap: 6px;
+  }
+
+  label {
+    font-size: 15px;
+    line-height: 22px;
+    font-weight: 600;
+  }
+
+  .field__required {
+    color: var(--qc-danger);
+  }
+
+  .field__control {
+    display: flex;
+    gap: 8px;
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #9ca3af;
+    border-radius: var(--qc-radius-input);
+    background: #ffffff;
+  }
+
+  input::placeholder {
+    color: #6b7280;
+  }
+
+  .field__help {
+    margin: 0;
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--qc-muted);
+  }
+</style>

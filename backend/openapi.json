@@ -1,0 +1,3106 @@
+{
+  "components": {
+    "schemas": {
+      "AgentConfigResponse": {
+        "properties": {
+          "contract_version": {
+            "const": 1,
+            "default": 1,
+            "title": "Contract Version",
+            "type": "integer"
+          },
+          "max_session_seconds": {
+            "title": "Max Session Seconds",
+            "type": "integer"
+          },
+          "session": {
+            "$ref": "#/components/schemas/AgentSession"
+          },
+          "warn_before_end_seconds": {
+            "title": "Warn Before End Seconds",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "contract_version",
+          "session",
+          "max_session_seconds",
+          "warn_before_end_seconds"
+        ],
+        "title": "AgentConfigResponse",
+        "type": "object"
+      },
+      "AgentSession": {
+        "description": "The body of AssemblyAI's session.update event, sent by the client unchanged.",
+        "properties": {
+          "greeting": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Left out when greet=false.",
+            "title": "Greeting"
+          },
+          "input": {
+            "$ref": "#/components/schemas/SessionInput"
+          },
+          "output": {
+            "$ref": "#/components/schemas/SessionOutput"
+          },
+          "system_prompt": {
+            "title": "System Prompt",
+            "type": "string"
+          },
+          "tools": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Tools",
+            "type": "array"
+          }
+        },
+        "required": [
+          "system_prompt",
+          "input",
+          "output",
+          "tools"
+        ],
+        "title": "AgentSession",
+        "type": "object"
+      },
+      "AnswerCard": {
+        "properties": {
+          "kind": {
+            "const": "answer",
+            "default": "answer",
+            "title": "Kind",
+            "type": "string"
+          },
+          "lead": {
+            "title": "Lead",
+            "type": "string"
+          },
+          "quote": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AnswerQuote"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "risks": {
+            "items": {
+              "$ref": "#/components/schemas/RiskFlag"
+            },
+            "title": "Risks",
+            "type": "array"
+          },
+          "source": {
+            "enum": [
+              "page",
+              "web",
+              "calculated",
+              "not_found"
+            ],
+            "title": "Source",
+            "type": "string"
+          },
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic",
+          "source",
+          "lead",
+          "kind",
+          "quote",
+          "risks"
+        ],
+        "title": "AnswerCard",
+        "type": "object"
+      },
+      "AnswerQuote": {
+        "properties": {
+          "page_title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Page Title"
+          },
+          "page_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Page Url"
+          },
+          "section_heading": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Section Heading"
+          },
+          "section_id": {
+            "title": "Section Id",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "section_id",
+          "section_heading",
+          "page_title",
+          "page_url"
+        ],
+        "title": "AnswerQuote",
+        "type": "object"
+      },
+      "AskPageRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "earlier_page_ids": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 9,
+            "title": "Earlier Page Ids",
+            "type": "array"
+          },
+          "page_id": {
+            "title": "Page Id",
+            "type": "string"
+          },
+          "pointer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PointerHint"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "question": {
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Question",
+            "type": "string"
+          }
+        },
+        "required": [
+          "page_id",
+          "question"
+        ],
+        "title": "AskPageRequest",
+        "type": "object"
+      },
+      "AudioFormat": {
+        "properties": {
+          "encoding": {
+            "const": "audio/pcm",
+            "default": "audio/pcm",
+            "title": "Encoding",
+            "type": "string"
+          }
+        },
+        "required": [
+          "encoding"
+        ],
+        "title": "AudioFormat",
+        "type": "object"
+      },
+      "Button": {
+        "additionalProperties": false,
+        "properties": {
+          "disabled": {
+            "title": "Disabled",
+            "type": "boolean"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "button",
+              "submit",
+              "link"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "kind",
+          "disabled"
+        ],
+        "title": "Button",
+        "type": "object"
+      },
+      "Choice": {
+        "additionalProperties": false,
+        "properties": {
+          "amount_inr": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount Inr"
+          },
+          "checked": {
+            "title": "Checked",
+            "type": "boolean"
+          },
+          "first_seen_revision": {
+            "title": "First Seen Revision",
+            "type": "integer"
+          },
+          "group": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "checkbox",
+              "radio"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "prechecked": {
+            "title": "Prechecked",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "kind",
+          "group",
+          "checked",
+          "prechecked",
+          "amount_inr",
+          "first_seen_revision"
+        ],
+        "title": "Choice",
+        "type": "object"
+      },
+      "ClientFlag": {
+        "additionalProperties": false,
+        "properties": {
+          "amount_inr": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount Inr"
+          },
+          "category": {
+            "enum": [
+              "costs_money",
+              "auto_debit",
+              "shares_data",
+              "hard_to_cancel",
+              "auto_renews",
+              "limits_rights",
+              "worth_knowing"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "detail": {
+            "title": "Detail",
+            "type": "string"
+          },
+          "element_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Element Ids",
+            "type": "array"
+          },
+          "params": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "title": "Params",
+            "type": "object"
+          },
+          "rule": {
+            "enum": [
+              "prechecked_paid_addon",
+              "prechecked_marketing_consent",
+              "late_price",
+              "trial_to_paid",
+              "flat_rate_offer",
+              "countdown_timer",
+              "hidden_cookie_reject"
+            ],
+            "title": "Rule",
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "high",
+              "medium",
+              "info"
+            ],
+            "title": "Severity",
+            "type": "string"
+          }
+        },
+        "required": [
+          "rule",
+          "category",
+          "severity",
+          "element_ids",
+          "detail",
+          "amount_inr",
+          "params"
+        ],
+        "title": "ClientFlag",
+        "type": "object"
+      },
+      "CookieBanner": {
+        "additionalProperties": false,
+        "properties": {
+          "accept_button_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accept Button Id"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "manage_button_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Manage Button Id"
+          },
+          "reject_button_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reject Button Id"
+          },
+          "reject_visible": {
+            "title": "Reject Visible",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "accept_button_id",
+          "reject_button_id",
+          "manage_button_id",
+          "reject_visible"
+        ],
+        "title": "CookieBanner",
+        "type": "object"
+      },
+      "CreatePageRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "snapshot": {
+            "$ref": "#/components/schemas/PageSnapshot"
+          }
+        },
+        "required": [
+          "snapshot"
+        ],
+        "title": "CreatePageRequest",
+        "type": "object"
+      },
+      "CreatePageResponse": {
+        "properties": {
+          "contract_version": {
+            "const": 1,
+            "default": 1,
+            "title": "Contract Version",
+            "type": "integer"
+          },
+          "page_id": {
+            "title": "Page Id",
+            "type": "string"
+          },
+          "page_type": {
+            "enum": [
+              "terms",
+              "privacy",
+              "checkout",
+              "form",
+              "offer",
+              "article",
+              "other"
+            ],
+            "title": "Page Type",
+            "type": "string"
+          },
+          "scan": {
+            "$ref": "#/components/schemas/ScanBrief"
+          },
+          "site_signals": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Site Signals",
+            "type": "array"
+          },
+          "summary_for_agent": {
+            "title": "Summary For Agent",
+            "type": "string"
+          }
+        },
+        "required": [
+          "contract_version",
+          "page_id",
+          "page_type",
+          "summary_for_agent",
+          "scan",
+          "site_signals"
+        ],
+        "title": "CreatePageResponse",
+        "type": "object"
+      },
+      "ErrorBody": {
+        "description": "retry_after_seconds is left out when there's no wait to suggest.",
+        "properties": {
+          "agent_message": {
+            "title": "Agent Message",
+            "type": "string"
+          },
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "retry_after_seconds": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retry After Seconds"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "agent_message"
+        ],
+        "title": "ErrorBody",
+        "type": "object"
+      },
+      "ErrorEnvelope": {
+        "properties": {
+          "contract_version": {
+            "const": 1,
+            "default": 1,
+            "title": "Contract Version",
+            "type": "integer"
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorBody"
+          }
+        },
+        "required": [
+          "contract_version",
+          "error"
+        ],
+        "title": "ErrorEnvelope",
+        "type": "object"
+      },
+      "ExplainFieldRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "field_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Field Id"
+          },
+          "field_label": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Field Label"
+          },
+          "page_id": {
+            "title": "Page Id",
+            "type": "string"
+          },
+          "pointer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PointerHint"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "page_id"
+        ],
+        "title": "ExplainFieldRequest",
+        "type": "object"
+      },
+      "FieldCard": {
+        "properties": {
+          "example": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Example"
+          },
+          "field_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Field Id"
+          },
+          "kind": {
+            "const": "field",
+            "default": "field",
+            "title": "Kind",
+            "type": "string"
+          },
+          "lead": {
+            "title": "Lead",
+            "type": "string"
+          },
+          "rows": {
+            "items": {
+              "$ref": "#/components/schemas/FieldRow"
+            },
+            "title": "Rows",
+            "type": "array"
+          },
+          "source": {
+            "enum": [
+              "page",
+              "web",
+              "calculated",
+              "not_found"
+            ],
+            "title": "Source",
+            "type": "string"
+          },
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic",
+          "source",
+          "lead",
+          "kind",
+          "field_id",
+          "rows",
+          "example"
+        ],
+        "title": "FieldCard",
+        "type": "object"
+      },
+      "FieldRow": {
+        "properties": {
+          "label": {
+            "enum": [
+              "What it is",
+              "Where to find it",
+              "Format",
+              "Common mistake"
+            ],
+            "title": "Label",
+            "type": "string"
+          },
+          "value": {
+            "title": "Value",
+            "type": "string"
+          }
+        },
+        "required": [
+          "label",
+          "value"
+        ],
+        "title": "FieldRow",
+        "type": "object"
+      },
+      "FormStep": {
+        "additionalProperties": false,
+        "description": "One step of a form walkthrough: a part of the form, or one field.",
+        "properties": {
+          "element_ids": {
+            "items": {
+              "maxLength": 40,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Element Ids",
+            "type": "array"
+          },
+          "heading": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Heading"
+          },
+          "key": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "element_ids"
+        ],
+        "title": "FormStep",
+        "type": "object"
+      },
+      "HealthResponse": {
+        "properties": {
+          "contract_version": {
+            "const": 1,
+            "default": 1,
+            "title": "Contract Version",
+            "type": "integer"
+          },
+          "service": {
+            "$ref": "#/components/schemas/ServiceState"
+          },
+          "status": {
+            "const": "ok",
+            "default": "ok",
+            "title": "Status",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "contract_version",
+          "status",
+          "version",
+          "service"
+        ],
+        "title": "HealthResponse",
+        "type": "object"
+      },
+      "JourneySummaryRequest": {
+        "additionalProperties": false,
+        "description": "The trail's fact lines, oldest first, and the summary so far.",
+        "properties": {
+          "facts": {
+            "items": {
+              "maxLength": 600,
+              "type": "string"
+            },
+            "maxItems": 10,
+            "minItems": 1,
+            "title": "Facts",
+            "type": "array"
+          },
+          "previous_summary": {
+            "anyOf": [
+              {
+                "maxLength": 2000,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Previous Summary"
+          }
+        },
+        "required": [
+          "facts"
+        ],
+        "title": "JourneySummaryRequest",
+        "type": "object"
+      },
+      "JourneySummaryResponse": {
+        "properties": {
+          "contract_version": {
+            "const": 1,
+            "default": 1,
+            "title": "Contract Version",
+            "type": "integer"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "contract_version",
+          "summary"
+        ],
+        "title": "JourneySummaryResponse",
+        "type": "object"
+      },
+      "LegalLink": {
+        "additionalProperties": false,
+        "properties": {
+          "href": {
+            "title": "Href",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "href"
+        ],
+        "title": "LegalLink",
+        "type": "object"
+      },
+      "LoanCostRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "fees_deducted_upfront": {
+            "default": true,
+            "title": "Fees Deducted Upfront",
+            "type": "boolean"
+          },
+          "gst_percent_on_fee": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gst Percent On Fee"
+          },
+          "page_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Page Id"
+          },
+          "principal_inr": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Principal Inr"
+          },
+          "processing_fee_inr": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Processing Fee Inr"
+          },
+          "processing_fee_percent": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Processing Fee Percent"
+          },
+          "rate_basis": {
+            "anyOf": [
+              {
+                "enum": [
+                  "flat_monthly",
+                  "flat_annual",
+                  "reducing_annual"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rate Basis"
+          },
+          "rate_percent": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rate Percent"
+          },
+          "tenure_months": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tenure Months"
+          }
+        },
+        "title": "LoanCostRequest",
+        "type": "object"
+      },
+      "Nudge": {
+        "properties": {
+          "highlight_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Highlight Ids",
+            "type": "array"
+          },
+          "risk_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Risk Ids",
+            "type": "array"
+          },
+          "risk_keys": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Risk Keys",
+            "type": "array"
+          },
+          "say": {
+            "title": "Say",
+            "type": "string"
+          }
+        },
+        "required": [
+          "say",
+          "risk_ids",
+          "risk_keys",
+          "highlight_ids"
+        ],
+        "title": "Nudge",
+        "type": "object"
+      },
+      "PageField": {
+        "additionalProperties": false,
+        "properties": {
+          "filled": {
+            "title": "Filled",
+            "type": "boolean"
+          },
+          "help_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Help Text"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "options": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Options",
+            "type": "array"
+          },
+          "placeholder": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Placeholder"
+          },
+          "required": {
+            "title": "Required",
+            "type": "boolean"
+          },
+          "section": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Section"
+          },
+          "sensitive": {
+            "title": "Sensitive",
+            "type": "boolean"
+          },
+          "type": {
+            "enum": [
+              "text",
+              "email",
+              "tel",
+              "number",
+              "date",
+              "select",
+              "textarea",
+              "password",
+              "other"
+            ],
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "type",
+          "required",
+          "placeholder",
+          "help_text",
+          "section",
+          "options",
+          "filled",
+          "sensitive"
+        ],
+        "title": "PageField",
+        "type": "object"
+      },
+      "PageSnapshot": {
+        "additionalProperties": false,
+        "properties": {
+          "buttons": {
+            "items": {
+              "$ref": "#/components/schemas/Button"
+            },
+            "title": "Buttons",
+            "type": "array"
+          },
+          "captured_at": {
+            "title": "Captured At",
+            "type": "string"
+          },
+          "checkboxes": {
+            "items": {
+              "$ref": "#/components/schemas/Choice"
+            },
+            "title": "Checkboxes",
+            "type": "array"
+          },
+          "client_flags": {
+            "items": {
+              "$ref": "#/components/schemas/ClientFlag"
+            },
+            "title": "Client Flags",
+            "type": "array"
+          },
+          "contract_version": {
+            "const": 1,
+            "title": "Contract Version",
+            "type": "integer"
+          },
+          "cookie_banner": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CookieBanner"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "fields": {
+            "items": {
+              "$ref": "#/components/schemas/PageField"
+            },
+            "title": "Fields",
+            "type": "array"
+          },
+          "lang": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lang"
+          },
+          "legal_links": {
+            "items": {
+              "$ref": "#/components/schemas/LegalLink"
+            },
+            "title": "Legal Links",
+            "type": "array"
+          },
+          "page_type_hint": {
+            "enum": [
+              "terms",
+              "privacy",
+              "checkout",
+              "form",
+              "offer",
+              "article",
+              "other"
+            ],
+            "title": "Page Type Hint",
+            "type": "string"
+          },
+          "prices": {
+            "items": {
+              "$ref": "#/components/schemas/Price"
+            },
+            "title": "Prices",
+            "type": "array"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "sections": {
+            "items": {
+              "$ref": "#/components/schemas/Section"
+            },
+            "title": "Sections",
+            "type": "array"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "truncated": {
+            "title": "Truncated",
+            "type": "boolean"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "contract_version",
+          "url",
+          "title",
+          "lang",
+          "page_type_hint",
+          "revision",
+          "captured_at",
+          "truncated",
+          "fields",
+          "checkboxes",
+          "buttons",
+          "prices",
+          "sections",
+          "legal_links",
+          "cookie_banner",
+          "client_flags"
+        ],
+        "title": "PageSnapshot",
+        "type": "object"
+      },
+      "PointerHint": {
+        "additionalProperties": false,
+        "description": "What the user last pointed at or focused on the page: element IDs only.",
+        "properties": {
+          "field_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Field Id"
+          },
+          "price_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price Id"
+          },
+          "section_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Section Id"
+          }
+        },
+        "title": "PointerHint",
+        "type": "object"
+      },
+      "Price": {
+        "additionalProperties": false,
+        "properties": {
+          "amount_inr": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount Inr"
+          },
+          "amount_text": {
+            "title": "Amount Text",
+            "type": "string"
+          },
+          "first_seen_revision": {
+            "title": "First Seen Revision",
+            "type": "integer"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "amount_text",
+          "amount_inr",
+          "first_seen_revision"
+        ],
+        "title": "Price",
+        "type": "object"
+      },
+      "RiskFlag": {
+        "properties": {
+          "amount_inr": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount Inr"
+          },
+          "category": {
+            "enum": [
+              "costs_money",
+              "auto_debit",
+              "shares_data",
+              "hard_to_cancel",
+              "auto_renews",
+              "limits_rights",
+              "worth_knowing"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "detail": {
+            "title": "Detail",
+            "type": "string"
+          },
+          "element_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Element Ids",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "origin": {
+            "enum": [
+              "client_rule",
+              "page_text"
+            ],
+            "title": "Origin",
+            "type": "string"
+          },
+          "quote": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quote"
+          },
+          "section_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Section Id"
+          },
+          "severity": {
+            "enum": [
+              "high",
+              "medium",
+              "info"
+            ],
+            "title": "Severity",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "key",
+          "category",
+          "severity",
+          "title",
+          "detail",
+          "quote",
+          "section_id",
+          "element_ids",
+          "amount_inr",
+          "origin"
+        ],
+        "title": "RiskFlag",
+        "type": "object"
+      },
+      "RiskListCard": {
+        "properties": {
+          "kind": {
+            "const": "risk_list",
+            "default": "risk_list",
+            "title": "Kind",
+            "type": "string"
+          },
+          "lead": {
+            "title": "Lead",
+            "type": "string"
+          },
+          "risks": {
+            "items": {
+              "$ref": "#/components/schemas/RiskFlag"
+            },
+            "title": "Risks",
+            "type": "array"
+          },
+          "source": {
+            "enum": [
+              "page",
+              "web",
+              "calculated",
+              "not_found"
+            ],
+            "title": "Source",
+            "type": "string"
+          },
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic",
+          "source",
+          "lead",
+          "kind",
+          "risks"
+        ],
+        "title": "RiskListCard",
+        "type": "object"
+      },
+      "ScanBrief": {
+        "properties": {
+          "kind": {
+            "anyOf": [
+              {
+                "enum": [
+                  "terms",
+                  "privacy",
+                  "checkout",
+                  "offer",
+                  "general"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Kind"
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "ready",
+              "failed",
+              "none"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "kind"
+        ],
+        "title": "ScanBrief",
+        "type": "object"
+      },
+      "ScanCounts": {
+        "properties": {
+          "high": {
+            "title": "High",
+            "type": "integer"
+          },
+          "info": {
+            "title": "Info",
+            "type": "integer"
+          },
+          "medium": {
+            "title": "Medium",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "high",
+          "medium",
+          "info"
+        ],
+        "title": "ScanCounts",
+        "type": "object"
+      },
+      "ScanRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "anyOf": [
+              {
+                "enum": [
+                  "terms",
+                  "privacy",
+                  "checkout",
+                  "offer",
+                  "general"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Kind"
+          },
+          "page_id": {
+            "title": "Page Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "page_id"
+        ],
+        "title": "ScanRequest",
+        "type": "object"
+      },
+      "ScanResult": {
+        "properties": {
+          "contract_version": {
+            "const": 1,
+            "default": 1,
+            "title": "Contract Version",
+            "type": "integer"
+          },
+          "counts": {
+            "$ref": "#/components/schemas/ScanCounts"
+          },
+          "kind": {
+            "anyOf": [
+              {
+                "enum": [
+                  "terms",
+                  "privacy",
+                  "checkout",
+                  "offer",
+                  "general"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Kind"
+          },
+          "nudge": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Nudge"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "page_id": {
+            "title": "Page Id",
+            "type": "string"
+          },
+          "risks": {
+            "items": {
+              "$ref": "#/components/schemas/RiskFlag"
+            },
+            "title": "Risks",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "ready",
+              "failed",
+              "none"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "contract_version",
+          "page_id",
+          "status",
+          "kind",
+          "risks",
+          "counts",
+          "nudge"
+        ],
+        "title": "ScanResult",
+        "type": "object"
+      },
+      "Section": {
+        "additionalProperties": false,
+        "properties": {
+          "heading": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Heading"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "level": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Level"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "heading",
+          "level",
+          "text"
+        ],
+        "title": "Section",
+        "type": "object"
+      },
+      "ServiceState": {
+        "properties": {
+          "open": {
+            "title": "Open",
+            "type": "boolean"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "enum": [
+                  "daily_cap",
+                  "total_cap",
+                  "paused"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          }
+        },
+        "required": [
+          "open",
+          "reason"
+        ],
+        "title": "ServiceState",
+        "type": "object"
+      },
+      "SessionInput": {
+        "properties": {
+          "format": {
+            "$ref": "#/components/schemas/AudioFormat"
+          },
+          "keyterms": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Keyterms",
+            "type": "array"
+          }
+        },
+        "required": [
+          "format",
+          "keyterms"
+        ],
+        "title": "SessionInput",
+        "type": "object"
+      },
+      "SessionOutput": {
+        "properties": {
+          "format": {
+            "$ref": "#/components/schemas/AudioFormat"
+          },
+          "voice": {
+            "title": "Voice",
+            "type": "string"
+          }
+        },
+        "required": [
+          "voice",
+          "format"
+        ],
+        "title": "SessionOutput",
+        "type": "object"
+      },
+      "SiteTrustRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "url": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "title": "SiteTrustRequest",
+        "type": "object"
+      },
+      "Source": {
+        "properties": {
+          "domain": {
+            "title": "Domain",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "url",
+          "domain"
+        ],
+        "title": "Source",
+        "type": "object"
+      },
+      "SummarizeRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "focus": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Focus"
+          },
+          "page_id": {
+            "title": "Page Id",
+            "type": "string"
+          },
+          "style": {
+            "default": "quick",
+            "enum": [
+              "quick",
+              "detailed"
+            ],
+            "title": "Style",
+            "type": "string"
+          }
+        },
+        "required": [
+          "page_id"
+        ],
+        "title": "SummarizeRequest",
+        "type": "object"
+      },
+      "SummaryCard": {
+        "properties": {
+          "bullets": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Bullets",
+            "type": "array"
+          },
+          "kind": {
+            "const": "summary",
+            "default": "summary",
+            "title": "Kind",
+            "type": "string"
+          },
+          "lead": {
+            "title": "Lead",
+            "type": "string"
+          },
+          "source": {
+            "enum": [
+              "page",
+              "web",
+              "calculated",
+              "not_found"
+            ],
+            "title": "Source",
+            "type": "string"
+          },
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic",
+          "source",
+          "lead",
+          "kind",
+          "bullets"
+        ],
+        "title": "SummaryCard",
+        "type": "object"
+      },
+      "ToolResult": {
+        "properties": {
+          "agent_notes": {
+            "title": "Agent Notes",
+            "type": "string"
+          },
+          "card": {
+            "anyOf": [
+              {
+                "discriminator": {
+                  "mapping": {
+                    "answer": "#/components/schemas/AnswerCard",
+                    "field": "#/components/schemas/FieldCard",
+                    "risk_list": "#/components/schemas/RiskListCard",
+                    "summary": "#/components/schemas/SummaryCard",
+                    "true_cost": "#/components/schemas/TrueCostCard",
+                    "trust": "#/components/schemas/TrustCard",
+                    "web_answer": "#/components/schemas/WebAnswerCard"
+                  },
+                  "propertyName": "kind"
+                },
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/AnswerCard"
+                  },
+                  {
+                    "$ref": "#/components/schemas/FieldCard"
+                  },
+                  {
+                    "$ref": "#/components/schemas/RiskListCard"
+                  },
+                  {
+                    "$ref": "#/components/schemas/SummaryCard"
+                  },
+                  {
+                    "$ref": "#/components/schemas/WebAnswerCard"
+                  },
+                  {
+                    "$ref": "#/components/schemas/TrueCostCard"
+                  },
+                  {
+                    "$ref": "#/components/schemas/TrustCard"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Card"
+          },
+          "contract_version": {
+            "const": 1,
+            "default": 1,
+            "title": "Contract Version",
+            "type": "integer"
+          },
+          "highlight_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Highlight Ids",
+            "type": "array"
+          },
+          "not_found": {
+            "title": "Not Found",
+            "type": "boolean"
+          },
+          "quote_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quote Text"
+          },
+          "say": {
+            "title": "Say",
+            "type": "string"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "title": "Sources",
+            "type": "array"
+          }
+        },
+        "required": [
+          "contract_version",
+          "say",
+          "agent_notes",
+          "card",
+          "highlight_ids",
+          "quote_text",
+          "sources",
+          "not_found"
+        ],
+        "title": "ToolResult",
+        "type": "object"
+      },
+      "TrueCostCard": {
+        "properties": {
+          "advertised": {
+            "title": "Advertised",
+            "type": "string"
+          },
+          "apr_percent": {
+            "title": "Apr Percent",
+            "type": "number"
+          },
+          "effective_annual_percent": {
+            "title": "Effective Annual Percent",
+            "type": "number"
+          },
+          "emi_inr": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Emi Inr"
+          },
+          "explanation": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Explanation",
+            "type": "array"
+          },
+          "extra_over_price_inr": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Extra Over Price Inr"
+          },
+          "fees_upfront_inr": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Fees Upfront Inr"
+          },
+          "figure_text": {
+            "title": "Figure Text",
+            "type": "string"
+          },
+          "kind": {
+            "const": "true_cost",
+            "default": "true_cost",
+            "title": "Kind",
+            "type": "string"
+          },
+          "lead": {
+            "title": "Lead",
+            "type": "string"
+          },
+          "source": {
+            "enum": [
+              "page",
+              "web",
+              "calculated",
+              "not_found"
+            ],
+            "title": "Source",
+            "type": "string"
+          },
+          "tenure_months": {
+            "title": "Tenure Months",
+            "type": "integer"
+          },
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          },
+          "total_paid_inr": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Total Paid Inr"
+          }
+        },
+        "required": [
+          "topic",
+          "source",
+          "lead",
+          "kind",
+          "figure_text",
+          "apr_percent",
+          "effective_annual_percent",
+          "advertised",
+          "emi_inr",
+          "tenure_months",
+          "total_paid_inr",
+          "fees_upfront_inr",
+          "extra_over_price_inr",
+          "explanation"
+        ],
+        "title": "TrueCostCard",
+        "type": "object"
+      },
+      "TrustCard": {
+        "properties": {
+          "checks_line": {
+            "title": "Checks Line",
+            "type": "string"
+          },
+          "domain": {
+            "title": "Domain",
+            "type": "string"
+          },
+          "kind": {
+            "const": "trust",
+            "default": "trust",
+            "title": "Kind",
+            "type": "string"
+          },
+          "lead": {
+            "title": "Lead",
+            "type": "string"
+          },
+          "reasons": {
+            "items": {
+              "$ref": "#/components/schemas/TrustReason"
+            },
+            "title": "Reasons",
+            "type": "array"
+          },
+          "source": {
+            "enum": [
+              "page",
+              "web",
+              "calculated",
+              "not_found"
+            ],
+            "title": "Source",
+            "type": "string"
+          },
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          },
+          "verdict": {
+            "enum": [
+              "looks_ok",
+              "be_careful",
+              "likely_unsafe"
+            ],
+            "title": "Verdict",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic",
+          "source",
+          "lead",
+          "kind",
+          "verdict",
+          "domain",
+          "reasons",
+          "checks_line"
+        ],
+        "title": "TrustCard",
+        "type": "object"
+      },
+      "TrustReason": {
+        "properties": {
+          "level": {
+            "enum": [
+              "good",
+              "warn",
+              "bad"
+            ],
+            "title": "Level",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "level"
+        ],
+        "title": "TrustReason",
+        "type": "object"
+      },
+      "VoiceTokenResponse": {
+        "properties": {
+          "contract_version": {
+            "const": 1,
+            "default": 1,
+            "title": "Contract Version",
+            "type": "integer"
+          },
+          "expires_in_seconds": {
+            "title": "Expires In Seconds",
+            "type": "integer"
+          },
+          "max_session_seconds": {
+            "title": "Max Session Seconds",
+            "type": "integer"
+          },
+          "token": {
+            "title": "Token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "contract_version",
+          "token",
+          "expires_in_seconds",
+          "max_session_seconds"
+        ],
+        "title": "VoiceTokenResponse",
+        "type": "object"
+      },
+      "WalkthroughRequest": {
+        "additionalProperties": false,
+        "description": "Up to 5 page sections, or up to 5 form steps, in page order.",
+        "properties": {
+          "form_steps": {
+            "items": {
+              "$ref": "#/components/schemas/FormStep"
+            },
+            "maxItems": 5,
+            "title": "Form Steps",
+            "type": "array"
+          },
+          "page_id": {
+            "title": "Page Id",
+            "type": "string"
+          },
+          "section_ids": {
+            "items": {
+              "maxLength": 40,
+              "type": "string"
+            },
+            "maxItems": 5,
+            "title": "Section Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "page_id"
+        ],
+        "title": "WalkthroughRequest",
+        "type": "object"
+      },
+      "WalkthroughResponse": {
+        "properties": {
+          "contract_version": {
+            "const": 1,
+            "default": 1,
+            "title": "Contract Version",
+            "type": "integer"
+          },
+          "steps": {
+            "items": {
+              "$ref": "#/components/schemas/WalkthroughStep"
+            },
+            "title": "Steps",
+            "type": "array"
+          }
+        },
+        "required": [
+          "contract_version",
+          "steps"
+        ],
+        "title": "WalkthroughResponse",
+        "type": "object"
+      },
+      "WalkthroughStep": {
+        "properties": {
+          "heading": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Heading"
+          },
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "risk_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Risk Ids",
+            "type": "array"
+          },
+          "say": {
+            "title": "Say",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "heading",
+          "say",
+          "risk_ids"
+        ],
+        "title": "WalkthroughStep",
+        "type": "object"
+      },
+      "WebAnswerCard": {
+        "properties": {
+          "bullets": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Bullets",
+            "type": "array"
+          },
+          "kind": {
+            "const": "web_answer",
+            "default": "web_answer",
+            "title": "Kind",
+            "type": "string"
+          },
+          "lead": {
+            "title": "Lead",
+            "type": "string"
+          },
+          "source": {
+            "enum": [
+              "page",
+              "web",
+              "calculated",
+              "not_found"
+            ],
+            "title": "Source",
+            "type": "string"
+          },
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic",
+          "source",
+          "lead",
+          "kind",
+          "bullets"
+        ],
+        "title": "WebAnswerCard",
+        "type": "object"
+      },
+      "WebLookupRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "page_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Page Id"
+          },
+          "query": {
+            "maxLength": 300,
+            "minLength": 1,
+            "title": "Query",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "WebLookupRequest",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Iris API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/agent-config": {
+      "get": {
+        "operationId": "agent_config_api_agent_config_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "greet",
+            "required": false,
+            "schema": {
+              "default": true,
+              "title": "Greet",
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "voice",
+            "required": false,
+            "schema": {
+              "default": "female",
+              "enum": [
+                "female",
+                "male"
+              ],
+              "title": "Voice",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentConfigResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          }
+        },
+        "summary": "Agent Config"
+      }
+    },
+    "/api/health": {
+      "get": {
+        "operationId": "health_api_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          }
+        },
+        "summary": "Health"
+      }
+    },
+    "/api/journey/summary": {
+      "post": {
+        "operationId": "journey_summary_api_journey_summary_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JourneySummaryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JourneySummaryResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          }
+        },
+        "summary": "Journey Summary"
+      }
+    },
+    "/api/pages": {
+      "post": {
+        "operationId": "create_page_api_pages_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePageRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePageResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          }
+        },
+        "summary": "Create Page"
+      }
+    },
+    "/api/pages/{page_id}/scan": {
+      "get": {
+        "operationId": "get_scan_api_pages__page_id__scan_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "page_id",
+            "required": true,
+            "schema": {
+              "title": "Page Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "exclude_keys",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 4000,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Exclude Keys"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScanResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          }
+        },
+        "summary": "Get Scan"
+      }
+    },
+    "/api/tools/ask-page": {
+      "post": {
+        "operationId": "ask_page_endpoint_api_tools_ask_page_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AskPageRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          }
+        },
+        "summary": "Ask Page Endpoint"
+      }
+    },
+    "/api/tools/explain-field": {
+      "post": {
+        "operationId": "explain_field_endpoint_api_tools_explain_field_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExplainFieldRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          }
+        },
+        "summary": "Explain Field Endpoint"
+      }
+    },
+    "/api/tools/loan-cost": {
+      "post": {
+        "operationId": "loan_cost_endpoint_api_tools_loan_cost_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoanCostRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          }
+        },
+        "summary": "Loan Cost Endpoint"
+      }
+    },
+    "/api/tools/scan": {
+      "post": {
+        "operationId": "scan_endpoint_api_tools_scan_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScanRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          }
+        },
+        "summary": "Scan Endpoint"
+      }
+    },
+    "/api/tools/site-trust": {
+      "post": {
+        "operationId": "site_trust_endpoint_api_tools_site_trust_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SiteTrustRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          }
+        },
+        "summary": "Site Trust Endpoint"
+      }
+    },
+    "/api/tools/summarize": {
+      "post": {
+        "operationId": "summarize_endpoint_api_tools_summarize_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SummarizeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          }
+        },
+        "summary": "Summarize Endpoint"
+      }
+    },
+    "/api/tools/walkthrough": {
+      "post": {
+        "operationId": "walkthrough_endpoint_api_tools_walkthrough_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WalkthroughRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalkthroughResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          }
+        },
+        "summary": "Walkthrough Endpoint"
+      }
+    },
+    "/api/tools/web-lookup": {
+      "post": {
+        "operationId": "web_lookup_endpoint_api_tools_web_lookup_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebLookupRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          }
+        },
+        "summary": "Web Lookup Endpoint"
+      }
+    },
+    "/api/voice-token": {
+      "get": {
+        "operationId": "get_voice_token_api_voice_token_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceTokenResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Error envelope"
+          }
+        },
+        "summary": "Get Voice Token"
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+.output/
+.wxt/
+dist-widget/
+playwright-report/
+test-results/
+public/
+src/core/api-types.ts
+*.md

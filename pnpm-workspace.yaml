@@ -1,0 +1,7 @@
+packages:
+  - extension
+  - demo-site
+
+# pnpm blocks dependency build scripts by default; allow only the ones the tools need.
+allowBuilds:
+  esbuild: true

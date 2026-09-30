@@ -1,0 +1,120 @@
+[
+  {
+    "type": "function",
+    "name": "get_page_overview",
+    "description": "Get a short overview of the page the user is looking at: its type, title, form fields, checkboxes, prices and sections with their IDs, and any risks already found. Call this when the user asks what's on the page or what they should know, or when you need element IDs. Do not call it for a question about a specific clause or field; use ask_page or explain_field instead.",
+    "parameters": { "type": "object", "properties": {}, "required": [] }
+  },
+  {
+    "type": "function",
+    "name": "explain_field",
+    "description": "Explain a form field: what it means, where to find the value, and the format to use. Call this whenever the user asks what a field means, what to enter, or where to find something a form asks for. If the user says 'this field' or doesn't name it, call it with no arguments: Iris uses the field they are pointing at. Do not call it for questions about terms, fees or prices.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "field_id": { "type": "string", "description": "The field's element ID from the page overview.", "examples": ["i-12"] },
+        "field_label": { "type": "string", "description": "The field's label as the user said it, when you don't know the ID.", "examples": ["IFSC code", "CKYC number"] }
+      },
+      "required": []
+    }
+  },
+  {
+    "type": "function",
+    "name": "ask_page",
+    "description": "Answer a question using the text of the current page: terms, privacy policy, product details or fine print. Call this for any question about what the page says, allows, charges or requires. When in doubt, call it. Never answer questions about the page from memory. Pass the user's own words, including 'this' or 'here': Iris adds what they are pointing at. If the page doesn't answer and a web search fits, it searches the web itself.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "question": { "type": "string", "description": "The user's question in their own words.", "examples": ["Can I cancel anytime?", "Do they share my data?"] }
+      },
+      "required": ["question"]
+    }
+  },
+  {
+    "type": "function",
+    "name": "summarize_page",
+    "description": "Summarise the current page. Call this when the user asks for a summary, the gist, or 'what's this page about'. Use quick unless the user asks for more detail.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "style": { "type": "string", "enum": ["quick", "detailed"], "description": "quick for a few points, detailed if the user asks for more." },
+        "focus": { "type": "string", "description": "Optional topic to focus on.", "examples": ["fees", "data sharing"] }
+      },
+      "required": ["style"]
+    }
+  },
+  {
+    "type": "function",
+    "name": "scan_page_risks",
+    "description": "List the risks on the current page: fees, auto-debits, data sharing, auto-renewals, hard-to-cancel terms and limits on the user's rights. Call this when the user asks 'anything I should know before I pay or agree?', 'is there a catch?' or 'what are the risks?'.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "kind": { "type": "string", "enum": ["terms", "privacy", "checkout", "offer", "general"], "description": "The kind of page, if you know it." }
+      },
+      "required": []
+    }
+  },
+  {
+    "type": "function",
+    "name": "check_site_trust",
+    "description": "Check whether the current website looks trustworthy, using domain age, look-alike names and public scam reports. Call this when the user asks if the site is legit, safe, real or a scam.",
+    "parameters": { "type": "object", "properties": {}, "required": [] }
+  },
+  {
+    "type": "function",
+    "name": "web_lookup",
+    "description": "Search the web when the answer is not on the page: general terms (for example what NACH means), error codes, or background facts. For anything the page itself might say, call ask_page first. Do not use this for the page's own terms.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": { "type": "string", "description": "A short search query.", "examples": ["what is a CKYC number India", "UPI error code meaning"] }
+      },
+      "required": ["query"]
+    }
+  },
+  {
+    "type": "function",
+    "name": "calculate_loan_cost",
+    "description": "Work out the true yearly cost of a loan or monthly-payment offer. Call this when the user asks about the real cost, the interest, the EMI or whether an offer is a good deal. Always use this instead of doing maths yourself. Leave out any value you don't know; it will be read from the page.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "principal_inr": { "type": "number", "description": "Loan or price amount in rupees.", "examples": [59999] },
+        "rate_percent": { "type": "number", "description": "The interest rate as a number.", "examples": [1.5] },
+        "rate_basis": { "type": "string", "enum": ["flat_monthly", "flat_annual", "reducing_annual"], "description": "How the page states the rate. '1.5% per month flat' is flat_monthly." },
+        "tenure_months": { "type": "integer", "description": "Number of monthly payments.", "examples": [12] },
+        "processing_fee_inr": { "type": "number", "description": "Processing fee in rupees, if the page gives an amount." },
+        "processing_fee_percent": { "type": "number", "description": "Processing fee as a percentage, if the page gives a percentage.", "examples": [2] },
+        "gst_percent_on_fee": { "type": "number", "description": "GST charged on the fee, if the page says '+ GST'.", "examples": [18] }
+      },
+      "required": []
+    }
+  },
+  {
+    "type": "function",
+    "name": "highlight_element",
+    "description": "Point at something on the page by highlighting it. Call this when you mention a specific field, button, checkbox or clause the user should see, or when they ask 'where is it?'. Results from other tools are highlighted automatically, so don't call this just to repeat them.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "element_ids": { "type": "array", "items": { "type": "string" }, "description": "Element or section IDs from a tool result or the page overview.", "examples": [["i-20"]] },
+        "note": { "type": "string", "description": "Optional short note to show beside the element, at most 80 characters." }
+      },
+      "required": ["element_ids"]
+    }
+  },
+  {
+    "type": "function",
+    "name": "walk_through",
+    "description": "Walk the user through the current page, one part at a time from top to bottom, highlighting each part. Call it with action start when they ask to be walked or taken through the page, or to be guided through filling in a form (then with mode form); with next, back, repeat or stop when they say so during a walkthrough. Speak its say line, then wait for them.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "action": { "type": "string", "enum": ["start", "next", "back", "repeat", "stop"], "description": "start a walkthrough, or move through the one that's running." },
+        "mode": { "type": "string", "enum": ["page", "form"], "description": "With start only: form to guide them through filling in the form, part by part; page for the whole page. Leave it out to let Iris choose." }
+      },
+      "required": ["action"]
+    }
+  }
+]

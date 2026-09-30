@@ -1,0 +1,159 @@
+---
+/**
+ * The cookie banner: a big "Accept all" and a small grey
+ * "Manage choices". The reject option only exists inside the manage panel. Shown on the
+ * first visit to any demo page until a choice is saved in qc_cookie_choice.
+ */
+---
+
+<div class="cookies" role="region" aria-label="Cookie consent" id="cookie-banner" hidden>
+  <div class="container cookies__inner">
+    <p class="cookies__text">
+      We use cookies to give you a better experience and show you relevant offers.
+    </p>
+    <div class="cookies__actions">
+      <button type="button" class="qc-button qc-button--large" data-choice="accepted">
+        Accept all
+      </button>
+      <button type="button" class="cookies__manage" id="cookie-manage">
+        Manage choices
+      </button>
+    </div>
+    <div class="cookies__panel" id="cookie-panel" hidden>
+      <div class="cookies__toggle">
+        <input type="checkbox" id="cookie-necessary" checked disabled />
+        <label for="cookie-necessary">
+          Necessary <span class="qc-fine">(always on)</span>
+        </label>
+      </div>
+      <div class="cookies__toggle">
+        <input type="checkbox" id="cookie-analytics" checked />
+        <label for="cookie-analytics">Analytics</label>
+      </div>
+      <div class="cookies__toggle">
+        <input type="checkbox" id="cookie-marketing" checked />
+        <label for="cookie-marketing">Marketing</label>
+      </div>
+      <div class="cookies__panel-actions">
+        <button type="button" class="qc-button" data-choice="custom">
+          Save choices
+        </button>
+        <button type="button" class="qc-button qc-button--quiet" data-choice="rejected">
+          Reject all
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  // Runs straight away, so the banner is there when the page first loads.
+  (() => {
+    const banner = document.getElementById('cookie-banner');
+    let saved = null;
+    try {
+      saved = localStorage.getItem('qc_cookie_choice');
+    } catch {
+      // Storage blocked: ask again.
+    }
+    if (banner && !saved) banner.hidden = false;
+  })();
+</script>
+
+<script>
+  const banner = document.getElementById('cookie-banner');
+  const panel = document.getElementById('cookie-panel');
+  document.getElementById('cookie-manage')?.addEventListener('click', () => {
+    if (panel) panel.hidden = false;
+  });
+  banner?.querySelectorAll<HTMLButtonElement>('[data-choice]').forEach((button) => {
+    button.addEventListener('click', () => {
+      try {
+        localStorage.setItem('qc_cookie_choice', button.dataset.choice ?? 'accepted');
+      } catch {
+        // Storage blocked: the banner comes back next time.
+      }
+      banner.hidden = true;
+    });
+  });
+</script>
+
+<style>
+  .cookies {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 900;
+    border-top: 1px solid var(--qc-border);
+    background: #ffffff;
+    box-shadow: 0 -8px 24px rgba(17, 24, 39, 0.08);
+    padding: 16px 0;
+  }
+
+  .cookies__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 24px;
+  }
+
+  .cookies__text {
+    flex: 1 1 320px;
+    margin: 0;
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .cookies__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .cookies__manage {
+    padding: 4px;
+    border: 0;
+    background: none;
+    color: var(--qc-muted);
+    font-size: 13px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+  }
+
+  /* On phones the buttons stack on the left, clear of anything in the bottom-right corner. */
+  @media (max-width: 640px) {
+    .cookies__actions {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+  }
+
+  .cookies__panel {
+    display: grid;
+    gap: 10px;
+    width: 100%;
+    padding-top: 12px;
+    border-top: 1px solid var(--qc-border);
+  }
+
+  .cookies__toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cookies__toggle input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--qc-primary);
+  }
+
+  .cookies__panel-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+</style>

@@ -1,0 +1,16 @@
+.iris-caption {
+  margin: 0;
+  min-width: 0;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--iris-text-muted);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.iris-caption--live {
+  color: var(--iris-text);
+}

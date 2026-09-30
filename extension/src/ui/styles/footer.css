@@ -1,0 +1,80 @@
+/* Main button, mute button and text box. */
+.iris-main-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 10px;
+  border: 1px solid var(--iris-accent);
+  background: var(--iris-accent);
+  color: var(--iris-on-accent);
+  font-size: 15px;
+  font-weight: 600;
+  transition: background var(--iris-dur-fast) var(--iris-ease-in);
+}
+
+.iris-main-button:hover {
+  background: var(--iris-accent-hover);
+  border-color: var(--iris-accent-hover);
+}
+
+.iris-main-button--end {
+  background: transparent;
+  color: var(--iris-accent);
+}
+
+.iris-main-button--end:hover {
+  background: var(--iris-accent-soft);
+  color: var(--iris-accent-ink);
+}
+
+.iris-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--iris-text-muted);
+  transition: background var(--iris-dur-fast) var(--iris-ease-in);
+}
+
+.iris-icon-button:hover {
+  background: var(--iris-surface-muted);
+  color: var(--iris-text);
+}
+
+.iris-mute-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--iris-border);
+  background: var(--iris-surface);
+}
+
+.iris-mute-button[aria-pressed='true'] {
+  background: var(--iris-surface-muted);
+  color: var(--iris-text);
+}
+
+.iris-textbox {
+  display: flex;
+}
+
+.iris-textbox__input {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid var(--iris-border);
+  background: var(--iris-surface);
+  font-size: 15px;
+}
+
+.iris-textbox__input::placeholder {
+  color: var(--iris-text-muted);
+}

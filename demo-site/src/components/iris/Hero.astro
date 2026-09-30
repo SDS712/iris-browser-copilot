@@ -1,0 +1,181 @@
+---
+/** The landing hero: the glyph and name, the tagline, the pitch and two buttons. */
+import Glyph from './Glyph.astro';
+---
+
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <p class="hero__brand">
+        <Glyph size={40} />
+        <span>Iris</span>
+      </p>
+      <h1 class="iris-hero-title">A second pair of eyes on every page.</h1>
+      <p class="hero__pitch">
+        Iris is a voice copilot that reads the page with you and gives you a heads-up before you
+        fill, agree, pay or trust.
+      </p>
+      <div class="hero__actions">
+        <a class="iris-button" href="/demo/">
+          Try the live demo
+        </a>
+        <a class="iris-button iris-button--quiet" href="#install">
+          Get the Chrome extension
+        </a>
+      </div>
+    </div>
+    <svg
+      class="hero__art"
+      viewBox="0 0 560 400"
+      role="img"
+      aria-label="The Iris panel beside a loan agreement, with one clause marked in yellow"
+    >
+      <rect x="0" y="16" width="330" height="368" rx="14" fill="#FFFFFF" stroke="#DDE3DF"></rect>
+      <rect x="24" y="44" width="170" height="14" rx="7" fill="#1C2B2A"></rect>
+      <rect x="24" y="72" width="100" height="8" rx="4" fill="#C9D2CE"></rect>
+      <g fill="#DDE3DF">
+        <rect x="24" y="104" width="282" height="8" rx="4"></rect>
+        <rect x="24" y="120" width="260" height="8" rx="4"></rect>
+        <rect x="24" y="136" width="270" height="8" rx="4"></rect>
+        <rect x="24" y="170" width="120" height="10" rx="5" fill="#1C2B2A"></rect>
+      </g>
+      <rect x="20" y="192" width="290" height="44" rx="4" fill="#FACC15" opacity="0.38"></rect>
+      <g fill="#8A9A94">
+        <rect x="24" y="198" width="276" height="8" rx="4"></rect>
+        <rect x="24" y="214" width="230" height="8" rx="4"></rect>
+      </g>
+      <g fill="#DDE3DF">
+        <rect x="24" y="258" width="282" height="8" rx="4"></rect>
+        <rect x="24" y="274" width="250" height="8" rx="4"></rect>
+        <rect x="24" y="290" width="266" height="8" rx="4"></rect>
+        <rect x="24" y="324" width="200" height="8" rx="4"></rect>
+        <rect x="24" y="340" width="236" height="8" rx="4"></rect>
+      </g>
+      <rect x="300" y="0" width="260" height="400" rx="18" fill="#F7F8F6" stroke="#DDE3DF"></rect>
+      <circle cx="330" cy="34" r="14" fill="#0F766E"></circle>
+      <circle cx="330" cy="34" r="6" fill="none" stroke="#0B4A46" stroke-width="3"></circle>
+      <text
+        x="352"
+        y="39"
+        font-family="Inter, sans-serif"
+        font-size="14"
+        font-weight="600"
+        fill="#1C2B2A"
+      >
+        iris
+      </text>
+      <text x="382" y="39" font-family="Inter, sans-serif" font-size="12" fill="#55655F">
+        Listening
+      </text>
+      <rect x="316" y="66" width="228" height="200" rx="12" fill="#FFFFFF" stroke="#DDE3DF"></rect>
+      <text
+        x="332"
+        y="92"
+        font-family="Inter, sans-serif"
+        font-size="10"
+        font-weight="600"
+        fill="#55655F"
+        letter-spacing="0.5"
+      >
+        CANCELLATION
+      </text>
+      <rect x="434" y="80" width="96" height="18" rx="9" fill="#DDF3EE"></rect>
+      <text
+        x="444"
+        y="93"
+        font-family="Inter, sans-serif"
+        font-size="10"
+        font-weight="500"
+        fill="#115E59"
+      >
+        From this page
+      </text>
+      <text font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#1C2B2A">
+        <tspan x="332" y="122">
+          You can cancel with 30 days'
+        </tspan>
+        <tspan x="332" y="142">
+          written notice. A ₹499 fee
+        </tspan>
+        <tspan x="332" y="162">
+          applies in the first six months.
+        </tspan>
+      </text>
+      <rect x="332" y="180" width="3" height="40" fill="#0F766E"></rect>
+      <rect x="342" y="184" width="180" height="7" rx="3.5" fill="#DDE3DF"></rect>
+      <rect x="342" y="198" width="150" height="7" rx="3.5" fill="#DDE3DF"></rect>
+      <rect x="342" y="212" width="80" height="7" rx="3.5" fill="#C9D2CE"></rect>
+      <rect x="332" y="234" width="96" height="22" rx="8" fill="#FFFFFF" stroke="#DDE3DF"></rect>
+      <text x="344" y="249" font-family="Inter, sans-serif" font-size="11" fill="#1C2B2A">
+        Show on page
+      </text>
+      <rect x="316" y="340" width="228" height="44" rx="10" fill="#0F766E"></rect>
+      <text
+        x="430"
+        y="367"
+        text-anchor="middle"
+        font-family="Inter, sans-serif"
+        font-size="14"
+        font-weight="600"
+        fill="#FFFFFF"
+      >
+        End
+      </text>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 72px 0 24px;
+  }
+
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .hero__copy {
+    display: grid;
+    gap: 20px;
+  }
+
+  .hero__brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .hero__pitch {
+    margin: 0;
+    font-size: 19px;
+    line-height: 30px;
+    color: var(--iris-text-muted);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .hero__art {
+    width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 860px) {
+    .hero {
+      padding-top: 40px;
+    }
+
+    .hero__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,37 @@
+---
+/** A checkbox with its label (which may hold links). */
+interface Props {
+  id: string;
+  checked?: boolean;
+  required?: boolean;
+}
+const { id, checked = false, required = false } = Astro.props;
+---
+
+<div class="check">
+  <input type="checkbox" id={id} name={id} checked={checked} required={required} />
+  <label for={id}>
+    <slot />
+  </label>
+</div>
+
+<style>
+  .check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  input {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    margin-top: 4px;
+    accent-color: var(--qc-primary);
+  }
+
+  label {
+    font-size: 15px;
+    line-height: 24px;
+  }
+</style>

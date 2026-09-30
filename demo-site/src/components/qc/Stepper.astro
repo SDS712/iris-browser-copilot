@@ -1,0 +1,47 @@
+---
+/** "1 Details · 2 Bank · 3 Review": a list, not headings, so it isn't read as sections. */
+interface Props {
+  steps: readonly string[];
+}
+const { steps } = Astro.props;
+---
+
+<ol class="stepper" aria-label="Application steps">
+  {steps.map((step, index) => (
+    <li>
+      <span class="stepper__number" aria-hidden="true">
+        {String(index + 1)}
+      </span>
+      <span>{step}</span>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .stepper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+  }
+
+  .stepper__number {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--qc-primary);
+    color: #ffffff;
+    font-size: 14px;
+  }
+</style>

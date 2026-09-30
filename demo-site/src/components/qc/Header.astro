@@ -1,0 +1,81 @@
+---
+/** Wordmark, three links and "Apply now". */
+import Wordmark from './Wordmark.astro';
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="/demo/" class="site-header__home" aria-label="QuickCred home">
+      <Wordmark />
+    </a>
+    <nav aria-label="Main">
+      <ul class="site-header__links">
+        <li>
+          <a href="/demo/">Offers</a>
+        </li>
+        <li>
+          <a href="/demo/#how-it-works">How it works</a>
+        </li>
+        <li>
+          <a href="#help">Help</a>
+        </li>
+      </ul>
+    </nav>
+    <a class="qc-button" href="/demo/apply">
+      Apply now
+    </a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--qc-border);
+    background: #ffffff;
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    min-height: 72px;
+  }
+
+  .site-header__home {
+    text-decoration: none;
+    margin-right: auto;
+  }
+
+  .site-header__links {
+    display: flex;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-header__links a {
+    color: var(--qc-ink);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .site-header__links a:hover {
+    color: var(--qc-primary);
+  }
+
+  @media (max-width: 720px) {
+    .site-header__inner {
+      flex-wrap: wrap;
+      gap: 12px 16px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    .site-header__links {
+      order: 3;
+      width: 100%;
+      gap: 16px;
+      font-size: 15px;
+    }
+  }
+</style>

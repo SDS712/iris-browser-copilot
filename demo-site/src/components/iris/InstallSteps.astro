@@ -1,0 +1,61 @@
+---
+/** Installing the extension from the zip. */
+const steps = [
+  'Download and unzip',
+  'Open chrome://extensions',
+  'Turn on Developer mode',
+  'Click "Load unpacked" and choose the unzipped folder',
+];
+---
+
+<ol class="steps">
+  {steps.map((step, index) => (
+    <li class="iris-card step">
+      <span class="step__number" aria-hidden="true">
+        {String(index + 1)}
+      </span>
+      <span>{step}</span>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .step {
+    display: grid;
+    gap: 10px;
+    align-content: start;
+    padding: 20px;
+  }
+
+  .step__number {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--iris-accent);
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  @media (max-width: 860px) {
+    .steps {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

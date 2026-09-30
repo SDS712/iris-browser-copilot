@@ -1,0 +1,51 @@
+# Secrets: commit only the *.env.example files
+.env
+.env.*
+*.env
+!.env.example
+!*.env.example
+
+# Extension signing keys
+extension/.keys/
+
+# Demo-site generated files
+demo-site/public/widget/
+demo-site/public/downloads/
+
+# Backend local data (spend ledger)
+backend/.data/
+backend/.data-*/
+
+# Build outputs
+dist/
+dist-widget/
+build/
+.output/
+.wxt/
+.astro/
+.vercel/
+*.egg-info/
+
+# Caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.venv/
+.cache/
+
+# Node
+node_modules/
+
+# Browser test output
+playwright-report/
+test-results/
+
+# OS and editors
+.DS_Store
+.idea/
+.vscode/

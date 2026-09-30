@@ -1,0 +1,90 @@
+---
+/** Terms and Privacy links, the fictional address, and "Reset demo". */
+import { BRAND } from '../../brand';
+import Wordmark from './Wordmark.astro';
+---
+
+<footer class="site-footer" id="help">
+  <div class="container site-footer__inner">
+    <div>
+      <Wordmark />
+      <p class="qc-fine site-footer__address">{BRAND.address}</p>
+      <p class="qc-fine">
+        Help: <a href={`mailto:${BRAND.email.support}`}>{BRAND.email.support}</a> · {BRAND.phone}
+      </p>
+    </div>
+    <ul class="site-footer__links">
+      <li>
+        <a href="/demo/terms">Terms</a>
+      </li>
+      <li>
+        <a href="/demo/privacy">Privacy</a>
+      </li>
+      <li>
+        <button type="button" class="site-footer__reset" id="reset-demo">
+          Reset demo
+        </button>
+      </li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  // Clears everything the demo saved (the cookie choice) and starts again.
+  document.getElementById('reset-demo')?.addEventListener('click', () => {
+    try {
+      Object.keys(localStorage)
+        .filter((key) => key.startsWith('qc_'))
+        .forEach((key) => {
+          localStorage.removeItem(key);
+        });
+    } catch {
+      // Storage blocked: nothing was saved.
+    }
+    location.reload();
+  });
+</script>
+
+<style>
+  .site-footer {
+    margin-top: 64px;
+    border-top: 1px solid var(--qc-border);
+    padding: 32px 0 48px;
+  }
+
+  .site-footer__inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .site-footer__address {
+    margin: 12px 0 4px;
+  }
+
+  .site-footer p {
+    margin-bottom: 0;
+  }
+
+  .site-footer__links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+  }
+
+  .site-footer__reset {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--qc-muted);
+    font-size: 12px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+  }
+</style>

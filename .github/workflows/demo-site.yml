@@ -1,0 +1,58 @@
+name: demo-site
+
+on:
+  push:
+    paths:
+      - "demo-site/**"
+      - "extension/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".github/workflows/demo-site.yml"
+  pull_request:
+    paths:
+      - "demo-site/**"
+      - "extension/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".github/workflows/demo-site.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: demo-site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Build the widget, and the extension zip for the download link
+        run: pnpm --filter extension build:widget && pnpm --filter extension zip
+        env:
+          IRIS_API_BASE: http://localhost:8000/api
+      - run: pnpm lint
+      - run: pnpm check
+      - name: Build the site with the widget, which the journey tests drive
+        run: pnpm build
+        env:
+          IRIS_DEMO_WIDGET: "true"
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.13"
+          enable-cache: true
+      - name: Install the backend (started in fake mode by Playwright)
+        working-directory: backend
+        run: uv sync --frozen
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm exec playwright test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: demo-site-playwright-report
+          path: demo-site/playwright-report/

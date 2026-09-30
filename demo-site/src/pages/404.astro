@@ -1,0 +1,39 @@
+---
+/** Not found: QuickCred-styled, with the way back to Iris and to the demo. */
+import QuickCredLayout from '../layouts/QuickCredLayout.astro';
+---
+
+<QuickCredLayout title="Page not found – QuickCred" widget={false}>
+  <div class="container missing">
+    <h1 class="qc-page-title">We couldn't find that page</h1>
+    <p class="qc-secondary">The link may be old, or the page may have moved.</p>
+    <div class="missing__links">
+      <a class="qc-button" href="/demo/">
+        Go to the QuickCred demo
+      </a>
+      <a class="qc-button qc-button--quiet" href="/">
+        About Iris
+      </a>
+    </div>
+  </div>
+</QuickCredLayout>
+
+<style>
+  .missing {
+    display: grid;
+    gap: 16px;
+    justify-items: start;
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+
+  .missing p {
+    margin: 0;
+  }
+
+  .missing__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+</style>

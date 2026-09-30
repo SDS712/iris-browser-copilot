@@ -1,0 +1,173 @@
+/* The orb: an iris whose pupil dilates and ripples. */
+.iris-orb {
+  --iris-orb-size: 32px;
+  --iris-level-in: 0;
+  --iris-level-out: 0;
+  position: relative;
+  flex: none;
+  width: var(--iris-orb-size);
+  height: var(--iris-orb-size);
+}
+
+.iris-orb svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.iris-orb__stop-centre {
+  stop-color: var(--iris-accent);
+}
+
+.iris-orb__stop-edge {
+  stop-color: var(--iris-accent-soft);
+}
+
+.iris-orb__body,
+.iris-orb__pupil,
+.iris-orb__ring,
+.iris-orb__ripple {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.iris-orb__body {
+  transition: opacity var(--iris-dur-slow) var(--iris-ease-in);
+}
+
+.iris-orb__ring {
+  fill: none;
+  stroke: var(--iris-accent-hover);
+  stroke-width: 7;
+}
+
+.iris-orb__core {
+  fill: var(--iris-accent-hover);
+}
+
+.iris-orb__glint {
+  fill: #ffffff;
+  fill-opacity: 0.8;
+}
+
+.iris-orb--small .iris-orb__glint {
+  display: none;
+}
+
+.iris-orb__slash {
+  display: none;
+  stroke: var(--iris-surface);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+.iris-orb__ripple {
+  fill: none;
+  stroke: var(--iris-accent);
+  stroke-width: 3;
+  opacity: 0;
+}
+
+/* idle: dimmed, slow breathing */
+.iris-orb[data-state='idle'] .iris-orb__body {
+  opacity: 0.4;
+  animation: iris-breathe 4s ease-in-out infinite;
+}
+
+/* listening: full colour, gentle breathing */
+.iris-orb[data-state='listening'] .iris-orb__body {
+  animation: iris-breathe 4s ease-in-out infinite;
+}
+
+/* connecting: dashed pupil ring, one turn a second */
+.iris-orb[data-state='connecting'] .iris-orb__ring,
+.iris-orb[data-state='thinking'] .iris-orb__ring {
+  stroke-dasharray: 9 6;
+  animation: iris-spin 1s linear infinite;
+}
+
+/* thinking: the dashed ring turns slowly */
+.iris-orb[data-state='thinking'] .iris-orb__ring {
+  animation-duration: 1.6s;
+}
+
+/* hearing: the pupil dilates with your voice */
+.iris-orb[data-state='hearing'] .iris-orb__pupil {
+  transform: scale(calc(1 + var(--iris-level-in) * 0.25));
+  transition: transform 80ms linear;
+}
+
+/* speaking: ripples spread out with Iris's voice */
+.iris-orb[data-state='speaking'] .iris-orb__ripple {
+  stroke-opacity: calc(0.35 + var(--iris-level-out) * 0.65);
+  animation: iris-ripple 1.2s ease-out infinite;
+}
+
+.iris-orb[data-state='speaking'] .iris-orb__ripple--late {
+  animation-delay: 0.6s;
+}
+
+/* muted: grey disc with a slash */
+.iris-orb[data-state='muted'] .iris-orb__disc {
+  fill: var(--iris-risk-info);
+}
+
+.iris-orb[data-state='muted'] .iris-orb__ring,
+.iris-orb[data-state='muted'] .iris-orb__core {
+  stroke: var(--iris-surface-muted);
+  fill: var(--iris-surface-muted);
+}
+
+.iris-orb[data-state='muted'] .iris-orb__ring {
+  fill: none;
+}
+
+.iris-orb[data-state='muted'] .iris-orb__slash {
+  display: block;
+}
+
+/* error: static, red outline */
+.iris-orb[data-state='error'] .iris-orb__disc {
+  stroke: var(--iris-risk-high);
+  stroke-width: 5;
+}
+
+@keyframes iris-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes iris-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes iris-ripple {
+  0% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iris-orb *,
+  .iris-orb[data-state] .iris-orb__ring {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .iris-orb[data-state='speaking'] .iris-orb__ripple {
+    opacity: 0;
+  }
+}

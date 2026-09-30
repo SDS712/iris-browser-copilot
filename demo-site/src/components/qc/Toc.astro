@@ -1,0 +1,56 @@
+---
+/** The document's numbered sections, as links; sticky beside the text on wide screens. */
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+const { headings } = Astro.props;
+---
+
+<nav class="toc" aria-label="Contents">
+  <h2 class="toc__title">Contents</h2>
+  <ol class="toc__list">
+    {headings
+      .filter((heading) => heading.depth === 2)
+      .map((heading) => (
+        <li>
+          <a href={`#${heading.slug}`}>{heading.text}</a>
+        </li>
+      ))}
+  </ol>
+</nav>
+
+<style>
+  .toc {
+    position: sticky;
+    top: 56px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .toc__title {
+    margin: 0 0 12px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+  }
+
+  .toc__list {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .toc__list a {
+    color: var(--qc-muted);
+    text-decoration: none;
+  }
+
+  .toc__list a:hover {
+    color: var(--qc-primary);
+    text-decoration: underline;
+  }
+</style>

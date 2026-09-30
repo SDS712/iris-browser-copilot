@@ -1,0 +1,25 @@
+---
+/** The Iris glyph, straight from the extension's own asset so the two never drift. */
+import glyph from '../../../../extension/assets/iris-glyph.svg?raw';
+
+interface Props {
+  size?: number;
+}
+const { size = 40 } = Astro.props;
+---
+
+<span class="glyph" style={`--glyph-size: ${String(size)}px`} set:html={glyph} />
+
+<style>
+  .glyph {
+    display: inline-block;
+    width: var(--glyph-size);
+    height: var(--glyph-size);
+    flex: none;
+  }
+
+  .glyph :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+</style>

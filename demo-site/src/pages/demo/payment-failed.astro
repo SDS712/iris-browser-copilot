@@ -1,0 +1,90 @@
+---
+/**
+ * A failed payment with a real, publicly documented UPI error code. The page
+ * doesn't explain the code: Iris looks it up.
+ */
+import { TriangleAlert } from 'lucide-static';
+import QuickCredLayout from '../../layouts/QuickCredLayout.astro';
+
+const ERROR_CODE = 'U16';
+---
+
+<QuickCredLayout title="Payment failed – QuickCred">
+  <div class="container failed">
+    <section class="qc-card failed__card" aria-labelledby="failed-title">
+      <span class="failed__icon" set:html={TriangleAlert} />
+      <h1 class="qc-page-title" id="failed-title">
+        Payment failed
+      </h1>
+      <p>We couldn't complete your UPI payment. No money was taken.</p>
+      <p class="failed__code">Error code: {ERROR_CODE}</p>
+      <div class="failed__actions">
+        <a class="qc-button" href="/demo/checkout">
+          Try again
+        </a>
+        <button type="button" class="qc-button qc-button--quiet" id="contact-support">
+          Contact support
+        </button>
+      </div>
+    </section>
+  </div>
+</QuickCredLayout>
+
+<script>
+  import { showToast } from '../../scripts/toast';
+  document.getElementById('contact-support')?.addEventListener('click', () => {
+    showToast();
+  });
+</script>
+
+<style>
+  .failed {
+    display: grid;
+    place-items: center;
+    padding-top: 64px;
+  }
+
+  .failed__card {
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+    max-width: 480px;
+    text-align: center;
+  }
+
+  .failed__card p {
+    margin: 0;
+  }
+
+  .failed__icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #fef2f2;
+    color: var(--qc-danger);
+  }
+
+  .failed__icon :global(svg) {
+    width: 28px;
+    height: 28px;
+  }
+
+  .failed__code {
+    padding: 4px 12px;
+    border-radius: 8px;
+    background: #f3f4f6;
+    color: #374151;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 14px;
+  }
+
+  .failed__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+</style>

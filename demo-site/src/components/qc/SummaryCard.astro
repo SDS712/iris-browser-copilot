@@ -1,0 +1,20 @@
+---
+/** A card with a title and a list of price rows. */
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<section class="qc-card summary" aria-label={title}>
+  <h2 class="qc-section-title">{title}</h2>
+  <div class="summary__rows">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .summary__rows {
+    margin-top: 12px;
+  }
+</style>

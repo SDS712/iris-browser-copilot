@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: #1c2b2a;
+  background: #ffffff;
+}
+
+.harness-page {
+  max-width: 640px;
+  padding: 32px;
+}
+
+.harness-panel {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 380px;
+  height: min(600px, calc(100vh - 48px));
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(16, 24, 23, 0.18);
+}
+
+.harness-panel .iris-root {
+  height: 100%;
+}
+
+.voices {
+  display: grid;
+  gap: 16px;
+  max-width: 640px;
+}
+
+.voices blockquote {
+  margin: 0;
+  padding: 12px 16px;
+  border-left: 3px solid #0f766e;
+  background: #eef2ef;
+}

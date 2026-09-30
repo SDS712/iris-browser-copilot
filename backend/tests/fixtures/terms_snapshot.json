@@ -1,0 +1,212 @@
+{
+  "contract_version": 1,
+  "url": "https://iris.example.com/demo/terms?ref=checkout&utm_source=mail",
+  "title": "QuickCred Loan Agreement: Terms and Conditions",
+  "lang": "en",
+  "page_type_hint": "terms",
+  "revision": 1,
+  "captured_at": "2026-09-26T05:30:00Z",
+  "truncated": false,
+  "fields": [],
+  "checkboxes": [],
+  "buttons": [
+    {
+      "id": "i-1",
+      "text": "Back to checkout",
+      "kind": "link",
+      "disabled": false
+    }
+  ],
+  "prices": [],
+  "sections": [
+    {
+      "id": "s-1",
+      "heading": "QuickCred Loan Agreement: Terms and Conditions",
+      "level": 1,
+      "text": "Last updated: 1 September 2026. These terms form the agreement between you, the Borrower, and QuickCred Finance Private Limited, the Lender, for a purchase loan arranged at the point of sale. Please read them carefully before you accept, because they set out how interest is charged, how repayments are collected and what happens if a payment is missed."
+    },
+    {
+      "id": "s-2",
+      "heading": "Key terms",
+      "level": 2,
+      "text": "Loans up to ₹5,00,000. Interest 1.5% p.m. flat. Tenures from 3 to 24 months. Easy automatic repayments."
+    },
+    {
+      "id": "s-3",
+      "heading": "1 Definitions",
+      "level": 2,
+      "text": "In this agreement, Borrower means the person named in the application who receives the product. Lender means QuickCred Finance Private Limited. EMI means the equated monthly instalment payable by the Borrower on each Due Date. Due Date means the 5th day of every calendar month. Mandate means the NACH e-mandate or UPI AutoPay instruction registered by the Borrower at the time of application."
+    },
+    {
+      "id": "s-4",
+      "heading": "2 Loan and disbursal",
+      "level": 2,
+      "text": "The loan amount is paid directly to the merchant from whom the Borrower buys the product. The Borrower receives the product and not the loan amount in cash. Disbursal is complete once the merchant confirms the order, and the first EMI falls due on the next Due Date after disbursal."
+    },
+    {
+      "id": "s-5",
+      "heading": "3.1 Interest",
+      "level": 3,
+      "text": "Interest is charged at 1.5% per month flat on the original principal for the full tenure of the loan. Interest is calculated on the full amount borrowed for every month of the tenure and does not reduce as the principal is repaid."
+    },
+    {
+      "id": "s-6",
+      "heading": "3.2 Processing fee",
+      "level": 3,
+      "text": "A processing fee of 2% of the loan amount plus GST is charged on every loan. The processing fee is deducted from the disbursal amount and is non-refundable, including where the loan is closed early or the order is cancelled."
+    },
+    {
+      "id": "s-7",
+      "heading": "3.3 Changes to the interest rate",
+      "level": 3,
+      "text": "QuickCred may change the interest rate applicable to future instalments by giving the Borrower 7 days' notice by SMS or email. The revised rate will apply to every instalment falling due after the notice ends."
+    },
+    {
+      "id": "s-8",
+      "heading": "4.1 Collection of EMIs",
+      "level": 3,
+      "text": "EMIs are collected automatically on the 5th of every month through the NACH e-mandate or UPI AutoPay set up at application. The Borrower must keep enough money in the linked bank account on each Due Date."
+    },
+    {
+      "id": "s-9",
+      "heading": "4.2 Recovery of overdue amounts",
+      "level": 3,
+      "text": "The Borrower authorises QuickCred to debit up to 1.5 times the EMI from the linked account to recover overdue amounts and charges, on any day after a missed Due Date."
+    },
+    {
+      "id": "s-10",
+      "heading": "4.3 Mandate cancellation",
+      "level": 3,
+      "text": "The mandate can't be cancelled while any amount is outstanding under this agreement. Any request to cancel it with the bank before the loan is fully repaid will be treated as a breach of this agreement."
+    },
+    {
+      "id": "s-11",
+      "heading": "5.1 Late fee",
+      "level": 3,
+      "text": "A late fee of ₹500 is charged for each missed instalment, in addition to the instalment itself."
+    },
+    {
+      "id": "s-12",
+      "heading": "5.2 Bounce charge",
+      "level": 3,
+      "text": "A bounce charge of ₹590 (₹500 + GST) is charged for each failed debit, including debits that fail because the mandate was cancelled or the account had insufficient funds."
+    },
+    {
+      "id": "s-13",
+      "heading": "5.3 Overdue interest",
+      "level": 3,
+      "text": "Overdue interest of 3% per month is charged on all overdue amounts from the Due Date until the date of payment."
+    },
+    {
+      "id": "s-14",
+      "heading": "5.4 Credit reporting",
+      "level": 3,
+      "text": "Missed payments may be reported to credit bureaus, which can affect the Borrower's credit score and future borrowing."
+    },
+    {
+      "id": "s-15",
+      "heading": "6.1 Foreclosure lock-in",
+      "level": 3,
+      "text": "No foreclosure is allowed in the first 3 months from the date of disbursal."
+    },
+    {
+      "id": "s-16",
+      "heading": "6.2 Foreclosure charge",
+      "level": 3,
+      "text": "After the first 3 months, the Borrower may repay the loan early by paying a foreclosure charge of 4% of the outstanding principal plus GST, together with all other amounts due."
+    },
+    {
+      "id": "s-17",
+      "heading": "6.3 Part-prepayment",
+      "level": 3,
+      "text": "Part-prepayment isn't allowed. The loan can only be repaid early in full."
+    },
+    {
+      "id": "s-18",
+      "heading": "7.1 QuickCred Plus membership",
+      "level": 3,
+      "text": "QuickCred Plus is an optional membership at ₹199 per month after a 30-day free trial. It is added at checkout and renews monthly until cancelled, with each monthly fee charged through the mandate."
+    },
+    {
+      "id": "s-19",
+      "heading": "7.2 Cancellation",
+      "level": 3,
+      "text": "You may cancel QuickCred Plus by giving 30 days' written notice to support@quickcred.example. A cancellation fee of ₹499 applies if you cancel within the first six months."
+    },
+    {
+      "id": "s-20",
+      "heading": "7.3 Refunds",
+      "level": 3,
+      "text": "No refunds are given for part months of QuickCred Plus membership."
+    },
+    {
+      "id": "s-21",
+      "heading": "8.1 QuickCred Shield",
+      "level": 3,
+      "text": "QuickCred Shield is a purchase protection plan at ₹1,299 per year, added at checkout."
+    },
+    {
+      "id": "s-22",
+      "heading": "8.2 Shield renewal",
+      "level": 3,
+      "text": "QuickCred Shield renews automatically every year and is charged through the mandate unless cancelled at least 15 days before the renewal date."
+    },
+    {
+      "id": "s-23",
+      "heading": "8.3 Shield claims",
+      "level": 3,
+      "text": "Claims under QuickCred Shield follow the Shield policy wording, which is available on request."
+    },
+    {
+      "id": "s-24",
+      "heading": "9.1 Sharing your information",
+      "level": 3,
+      "text": "The Borrower consents to QuickCred sharing their information with partners, affiliates, credit bureaus and service providers, including for marketing."
+    },
+    {
+      "id": "s-25",
+      "heading": "9.2 Calls and messages",
+      "level": 3,
+      "text": "The Borrower agrees to receive calls, SMS and WhatsApp messages from QuickCred and its partners even if registered on the Do Not Disturb list."
+    },
+    {
+      "id": "s-26",
+      "heading": "10.1 Arbitration",
+      "level": 3,
+      "text": "All disputes arising under this agreement go to arbitration by a sole arbitrator appointed by QuickCred."
+    },
+    {
+      "id": "s-27",
+      "heading": "10.2 Seat of arbitration",
+      "level": 3,
+      "text": "The seat of arbitration is Pune, and the courts at Pune alone have jurisdiction over any related proceedings."
+    },
+    {
+      "id": "s-28",
+      "heading": "10.3 Class actions",
+      "level": 3,
+      "text": "The Borrower waives the right to join a class action or any representative proceeding against QuickCred."
+    },
+    {
+      "id": "s-29",
+      "heading": "11 Changes to these terms",
+      "level": 2,
+      "text": "QuickCred may change these terms by posting them on its website. Continued use of the loan or any QuickCred service after a change means acceptance of the changed terms."
+    },
+    {
+      "id": "s-30",
+      "heading": "12 Grievances",
+      "level": 2,
+      "text": "Complaints can be sent to grievance@quickcred.example. QuickCred replies within 30 days of receiving a complaint."
+    }
+  ],
+  "legal_links": [
+    {
+      "id": "i-2",
+      "text": "Privacy Policy",
+      "href": "/demo/privacy"
+    }
+  ],
+  "cookie_banner": null,
+  "client_flags": []
+}

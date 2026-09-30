@@ -1,0 +1,44 @@
+---
+/** One of the four moments Iris helps with. */
+interface Props {
+  title: string;
+  line: string;
+  example: string;
+}
+const { title, line, example } = Astro.props;
+---
+
+<article class="iris-card moment">
+  <h3 class="moment__title">{title}</h3>
+  <p>{line}</p>
+  <p class="moment__example">"{example}"</p>
+</article>
+
+<style>
+  .moment {
+    display: grid;
+    gap: 8px;
+    align-content: start;
+  }
+
+  .moment__title {
+    font-size: 19px;
+    line-height: 28px;
+    font-weight: 600;
+  }
+
+  .moment p {
+    margin: 0;
+  }
+
+  .moment__example {
+    width: fit-content;
+    padding: 4px 12px;
+    border-radius: 8px;
+    background: var(--iris-accent-soft);
+    color: var(--iris-accent-ink);
+    font-size: 15px;
+    line-height: 24px;
+    font-weight: 500;
+  }
+</style>

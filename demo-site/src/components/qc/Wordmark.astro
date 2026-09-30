@@ -1,0 +1,29 @@
+---
+/** The QuickCred wordmark: a simple geometric mark and the name. */
+import { BRAND } from '../../brand';
+---
+
+<span class="wordmark">
+  <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
+    <rect width="28" height="28" rx="8" fill="#4F46E5"></rect>
+    <circle cx="13" cy="13" r="6.5" fill="none" stroke="#FFFFFF" stroke-width="3"></circle>
+    <path d="M16.5 16.5 L21 21" stroke="#C7D2FE" stroke-width="3" stroke-linecap="round"></path>
+  </svg>
+  <span class="wordmark__name">{BRAND.company}</span>
+</span>
+
+<style>
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .wordmark__name {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--qc-ink);
+  }
+</style>

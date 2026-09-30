@@ -1,0 +1,189 @@
+---
+/** The Iris landing page. No widget here. */
+import { IRIS_GITHUB_URL, IRIS_VIDEO_URL } from 'astro:env/server';
+import Glyph from '../components/iris/Glyph.astro';
+import Hero from '../components/iris/Hero.astro';
+import InstallSteps from '../components/iris/InstallSteps.astro';
+import MomentCard from '../components/iris/MomentCard.astro';
+import VideoEmbed from '../components/iris/VideoEmbed.astro';
+import IrisLayout from '../layouts/IrisLayout.astro';
+
+const moments = [
+  {
+    title: 'Before you fill',
+    line: 'Confusing form fields, explained in plain words.',
+    example: "What's a CKYC number?",
+  },
+  {
+    title: 'Before you agree',
+    line: 'Terms and privacy policies, answered from the actual clause.',
+    example: 'Can I cancel anytime?',
+  },
+  {
+    title: 'Before you pay',
+    line: 'Pre-ticked add-ons, late fees and flat-rate tricks, caught.',
+    example: 'Anything I should know before I pay?',
+  },
+  {
+    title: 'Before you trust',
+    line: 'A quick check on whether a site looks legitimate.',
+    example: 'Is this site legit?',
+  },
+];
+const built = [
+  'Listening, speaking and interruptions: AssemblyAI Voice Agent API',
+  'Tools that read the page: client-side tools',
+  "Reasoning over long terms: Claude through AssemblyAI's LLM Gateway",
+];
+const privacy = [
+  'Iris never types or clicks for you.',
+  'It never reads what you type into forms.',
+  'Page text is kept in memory for 30 minutes, then forgotten.',
+];
+---
+
+<IrisLayout
+  title="Iris: a second pair of eyes on every page"
+  description="Iris is a voice copilot that reads the page with you and gives you a heads-up before you fill, agree, pay or trust."
+>
+  <main>
+    <Hero />
+
+    <section class="container iris-section" aria-labelledby="moments-title">
+      <h2 class="iris-section-title" id="moments-title">
+        Four moments Iris is there for
+      </h2>
+      <div class="moments">
+        {moments.map((moment) => (
+          <MomentCard {...moment} />
+        ))}
+      </div>
+    </section>
+
+    {IRIS_VIDEO_URL && (
+      <section class="container iris-section" aria-labelledby="video-title">
+        <h2 class="iris-section-title" id="video-title">
+          Watch the demo
+        </h2>
+        <div class="section-body">
+          <VideoEmbed url={IRIS_VIDEO_URL} />
+        </div>
+      </section>
+    )}
+
+    <section class="container iris-section" id="install" aria-labelledby="install-title">
+      <h2 class="iris-section-title" id="install-title">
+        Install the extension
+      </h2>
+      <p class="iris-muted">Iris runs in Chrome's side panel on any website.</p>
+      <p>
+        <a class="iris-button" href="/downloads/iris-extension.zip" download>
+          Download the extension (.zip)
+        </a>
+      </p>
+      <InstallSteps />
+    </section>
+
+    <div class="container iris-section two-up">
+      <section class="iris-card" aria-labelledby="built-title">
+        <h2 class="iris-section-title" id="built-title">
+          How it's built
+        </h2>
+        <ul class="lines">
+          {built.map((line) => (
+            <li>{line}</li>
+          ))}
+        </ul>
+        {IRIS_GITHUB_URL && (
+          <p>
+            <a href={IRIS_GITHUB_URL}>The code on GitHub</a>
+          </p>
+        )}
+      </section>
+      <section class="iris-card" aria-labelledby="privacy-title">
+        <h2 class="iris-section-title" id="privacy-title">
+          Privacy
+        </h2>
+        <ul class="lines">
+          {privacy.map((line) => (
+            <li>{line}</li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="container footer">
+    <p class="footer__brand">
+      <Glyph size={24} />
+      <span>Iris</span>
+    </p>
+    <p class="iris-muted">Built for the AssemblyAI Voice Agent Hackathon on lablab.ai</p>
+    {IRIS_GITHUB_URL && <a href={IRIS_GITHUB_URL}>GitHub</a>}
+  </footer>
+</IrisLayout>
+
+<style>
+  .moments {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .section-body {
+    margin-top: 24px;
+  }
+
+  #install p {
+    margin: 12px 0 24px;
+  }
+
+  .two-up {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .lines {
+    display: grid;
+    gap: 8px;
+    margin: 16px 0 0;
+    padding-left: 20px;
+  }
+
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 24px;
+    margin-top: 72px;
+    padding-top: 24px;
+    padding-bottom: 48px;
+    border-top: 1px solid var(--iris-border);
+  }
+
+  .footer p {
+    margin: 0;
+  }
+
+  .footer__brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 960px) {
+    .moments {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .moments,
+    .two-up {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,13 @@
+{
+  "name": "iris",
+  "private": true,
+  "packageManager": "pnpm@12.6.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build:extension": "pnpm --filter extension build",
+    "build:widget": "pnpm --filter extension build:widget",
+    "build:demo": "pnpm --filter demo-site build"
+  }
+}

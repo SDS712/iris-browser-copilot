@@ -1,0 +1,93 @@
+{
+  "contract_version": 1,
+  "url": "https://iris.example.com/demo/",
+  "title": "QuickCred – Own the Nimbus 14 today",
+  "lang": "en",
+  "page_type_hint": "offer",
+  "revision": 1,
+  "captured_at": "2026-09-26T05:30:00Z",
+  "truncated": false,
+  "fields": [],
+  "checkboxes": [],
+  "buttons": [
+    {
+      "id": "i-5",
+      "text": "Apply now",
+      "kind": "link",
+      "disabled": false
+    }
+  ],
+  "prices": [
+    {
+      "id": "i-3",
+      "label": "Nimbus 14 laptop",
+      "amount_text": "₹59,999",
+      "amount_inr": 59999,
+      "first_seen_revision": 1
+    },
+    {
+      "id": "i-4",
+      "label": "Monthly instalment",
+      "amount_text": "₹5,900/month",
+      "amount_inr": 5900,
+      "first_seen_revision": 1
+    }
+  ],
+  "sections": [
+    {
+      "id": "s-1",
+      "heading": "Own the Nimbus 14 today.",
+      "level": 1,
+      "text": "Pay in easy monthly instalments. Approved in 2 minutes. Nimbus 14 laptop ₹59,999. ₹5,900/month*. No-cost EMI*. Offer ends in 09:59."
+    },
+    {
+      "id": "s-2",
+      "heading": null,
+      "level": null,
+      "text": "*12 monthly instalments at 1.5% p.m. flat. Processing fee ₹1,416 (2% + GST), deducted upfront. T&Cs apply."
+    },
+    {
+      "id": "s-3",
+      "heading": "Why QuickCred",
+      "level": 2,
+      "text": "Instant approval, no paperwork and easy automatic repayments from your bank account."
+    }
+  ],
+  "legal_links": [
+    {
+      "id": "i-8",
+      "text": "Terms",
+      "href": "/demo/terms"
+    }
+  ],
+  "cookie_banner": null,
+  "client_flags": [
+    {
+      "rule": "flat_rate_offer",
+      "category": "costs_money",
+      "severity": "medium",
+      "element_ids": [
+        "s-2"
+      ],
+      "detail": "The rate is flat, so it costs more than it sounds.",
+      "amount_inr": null,
+      "params": {
+        "rate_percent": 1.5,
+        "rate_basis": "flat_monthly",
+        "tenure_months": 12,
+        "principal_inr": 59999
+      }
+    },
+    {
+      "rule": "countdown_timer",
+      "category": "worth_knowing",
+      "severity": "info",
+      "element_ids": [
+        "i-6"
+      ],
+      "detail": "A countdown timer is running.",
+      "amount_inr": null,
+      "params": {}
+    }
+  ]
+}

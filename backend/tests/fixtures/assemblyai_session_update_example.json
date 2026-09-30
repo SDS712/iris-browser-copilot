@@ -1,0 +1,43 @@
+{
+  "_source": "https://www.assemblyai.com/docs/voice-agents/voice-agent-api/session-configuration (full inline session configuration, fetched 2026-09-26), with one tool from .../tools/client-side-tools",
+  "type": "session.update",
+  "session": {
+    "system_prompt": "You are a friendly support agent. Keep responses under 2 sentences.",
+    "greeting": "Hi! How can I help you today?",
+    "tools": [
+      {
+        "type": "function",
+        "name": "get_weather",
+        "description": "Get current weather for any city. Use this whenever the user asks about weather.",
+        "parameters": {
+          "type": "object",
+          "properties": {"location": {"type": "string", "description": "City name, e.g. London"}},
+          "required": ["location"]
+        },
+        "execution_mode": "interactive",
+        "timeout_seconds": 120
+      }
+    ],
+    "input": {
+      "format": { "encoding": "audio/pcm" },
+      "keyterms": ["AssemblyAI", "Universal"],
+      "transcription_mode": "balanced",
+      "transcription_prompt": "Expect product names and order IDs.",
+      "language_codes": ["en"],
+      "voice_focus": "near-field",
+      "voice_focus_threshold": 0.5,
+      "turn_detection": {
+        "vad_threshold": 0.5,
+        "min_silence": 1000,
+        "max_silence": 3000,
+        "interrupt_response": true,
+        "interruption_delay": 100
+      }
+    },
+    "output": {
+      "voice": "alba",
+      "format": { "encoding": "audio/pcm" },
+      "volume": 100
+    }
+  }
+}

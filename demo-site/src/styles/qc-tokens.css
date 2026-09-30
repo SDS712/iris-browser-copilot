@@ -1,0 +1,23 @@
+/* QuickCred brand tokens. Light mode only; never teal. */
+:root {
+  --qc-primary: #4f46e5;
+  --qc-primary-hover: #4338ca;
+  --qc-ink: #111827;
+  --qc-muted: #6b7280;
+  /* #6B7280 is 4.4:1 on lavender; secondary text on lavender uses this instead (7.6:1). */
+  --qc-muted-on-soft: #4b5563;
+  --qc-bg: #ffffff;
+  --qc-bg-soft: #f5f3ff;
+  --qc-border: #e5e7eb;
+  --qc-success: #059669;
+  /* #059669 is 3.8:1 on white; badge text uses the darker shade (5.3:1 on its tint). */
+  --qc-success-ink: #047857;
+  --qc-success-tint: #ecfdf5;
+  --qc-danger: #b91c1c;
+  --qc-radius-card: 14px;
+  --qc-radius-input: 10px;
+  --qc-shadow: 0 1px 2px rgba(17, 24, 39, 0.05), 0 8px 24px rgba(79, 70, 229, 0.08);
+  --qc-font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --qc-banner-height: 32px;
+  color-scheme: light;
+}

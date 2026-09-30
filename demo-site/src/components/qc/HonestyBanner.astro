@@ -1,0 +1,34 @@
+---
+/** Always on top of every QuickCred page, and never dismissible. */
+import { BRAND } from '../../brand';
+---
+
+<div class="honesty">
+  <p>
+    Demo site. {BRAND.company} is a fictional lender built to show Iris. Don't enter real details.
+  </p>
+</div>
+
+<style>
+  /* Sticky rather than fixed: it stays on top while scrolling, and a two-line banner on a
+     phone pushes the header down instead of covering it. */
+  .honesty {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    min-height: var(--qc-banner-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 16px;
+    background: #111827;
+    color: #ffffff;
+  }
+
+  .honesty p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 20px;
+    text-align: center;
+  }
+</style>

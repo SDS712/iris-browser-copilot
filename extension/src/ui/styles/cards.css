@@ -1,0 +1,455 @@
+/* Cards. */
+.iris-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.iris-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--iris-card-border);
+  background: var(--iris-surface);
+  box-shadow: var(--iris-card-shadow);
+  animation: iris-card-in var(--iris-dur-base) var(--iris-ease-in);
+}
+
+@keyframes iris-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.iris-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.iris-card__topic {
+  margin: 0;
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--iris-text-muted);
+}
+
+.iris-card__lead {
+  margin: 0;
+}
+
+.iris-card__lead--latest {
+  font-size: 17px;
+  line-height: 26px;
+  font-weight: 500;
+}
+
+.iris-card--collapsed {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 40px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  background: var(--iris-surface-muted);
+  box-shadow: none;
+  font-size: 13px;
+  line-height: 20px;
+  text-align: left;
+  color: var(--iris-text);
+  animation: none;
+}
+
+.iris-card--collapsed:hover {
+  border-color: var(--iris-border);
+}
+
+.iris-card__collapsed-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.iris-card--loading {
+  padding: 10px 12px;
+  min-height: 40px;
+  justify-content: center;
+  box-shadow: none;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--iris-text-muted);
+  background-color: var(--iris-surface-muted);
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--iris-surface) 70%, transparent) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: iris-shimmer 1.6s linear infinite;
+}
+
+@keyframes iris-shimmer {
+  from {
+    background-position: 150% 0;
+  }
+  to {
+    background-position: -50% 0;
+  }
+}
+
+.iris-badge {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.iris-badge--page {
+  background: var(--iris-accent-soft);
+  color: var(--iris-accent-ink);
+}
+
+.iris-badge--web,
+.iris-badge--not_found {
+  background: var(--iris-surface-muted);
+  color: var(--iris-text-muted);
+}
+
+.iris-badge--calculated {
+  box-shadow: inset 0 0 0 1px var(--iris-accent);
+  color: var(--iris-accent-ink);
+}
+
+.iris-quote {
+  margin: 0;
+  padding-left: 12px;
+  border-left: 3px solid var(--iris-accent);
+}
+
+.iris-quote__text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--iris-text-muted);
+}
+
+.iris-quote__heading {
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--iris-text-muted);
+}
+
+.iris-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.iris-small-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid var(--iris-border);
+  background: transparent;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--iris-text);
+  transition: background var(--iris-dur-fast) var(--iris-ease-in);
+}
+
+.iris-small-button:hover {
+  background: var(--iris-surface-muted);
+}
+
+.iris-small-button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* The walkthrough's current stop. */
+.iris-card--tour {
+  border-color: var(--iris-accent);
+}
+
+.iris-tour__heading {
+  margin: 0;
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 600;
+  color: var(--iris-text);
+}
+
+.iris-sources {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.iris-sources li {
+  display: flex;
+  flex-direction: column;
+}
+
+.iris-sources a {
+  color: var(--iris-accent);
+}
+
+.iris-sources__domain {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--iris-text-muted);
+}
+
+/* Risk tags: an 8px dot and a 13px label. */
+.iris-risk-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin: 0;
+}
+
+.iris-risk-tags__more {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--iris-text-muted);
+}
+
+.iris-risk-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.iris-dot {
+  display: inline-block;
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.iris-dot--high,
+.iris-dot--reason-bad {
+  background: var(--iris-risk-high);
+}
+
+.iris-dot--medium,
+.iris-dot--reason-warn {
+  background: var(--iris-risk-medium);
+}
+
+.iris-dot--info {
+  box-shadow: inset 0 0 0 1.5px var(--iris-risk-info);
+}
+
+.iris-dot--reason-good {
+  box-shadow: inset 0 0 0 1.5px var(--iris-ok);
+}
+
+/* Field card. */
+.iris-field-rows {
+  display: grid;
+  grid-template-columns: minmax(88px, 32%) 1fr;
+  gap: 8px 12px;
+  margin: 0;
+}
+
+.iris-field-rows__row {
+  display: contents;
+}
+
+.iris-field-rows dt {
+  font-size: 12px;
+  line-height: 22px;
+  font-weight: 500;
+  color: var(--iris-text-muted);
+}
+
+.iris-field-rows dd {
+  margin: 0;
+}
+
+.iris-field-rows__format {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+/* Risk list card. */
+.iris-risk-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.iris-risk-list__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 12px 0;
+  border-top: 1px solid var(--iris-border);
+}
+
+.iris-risk-list__item:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.iris-risk-list__title {
+  margin: 0;
+  font-weight: 600;
+}
+
+.iris-risk-list__detail {
+  margin: 0;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+/* Summary and web answer bullets. */
+.iris-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+/* True-cost card. */
+.iris-figure {
+  margin: 0;
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+.iris-true-cost__line {
+  margin: -6px 0 0;
+}
+
+.iris-true-cost__details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--iris-text-muted);
+}
+
+.iris-true-cost__details p {
+  margin: 0;
+}
+
+.iris-disclosure {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 4px;
+  min-height: 40px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--iris-accent);
+}
+
+.iris-disclosure__chevron,
+.iris-transcript__chevron {
+  transition: transform var(--iris-dur-fast) var(--iris-ease-in);
+}
+
+.iris-disclosure[aria-expanded='true'] .iris-disclosure__chevron {
+  transform: rotate(90deg);
+}
+
+/* Trust card. */
+.iris-trust__verdict {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+}
+
+.iris-trust__domain {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--iris-text-muted);
+}
+
+.iris-trust__reasons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.iris-trust__reasons li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.iris-trust__checks {
+  margin: 0;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--iris-text-muted);
+}
+
+.iris-verdict {
+  display: inline-flex;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  color: var(--iris-verdict-ink);
+}
+
+.iris-verdict--looks_ok {
+  background: var(--iris-ok);
+}
+
+.iris-verdict--be_careful {
+  background: var(--iris-risk-medium);
+}
+
+.iris-verdict--likely_unsafe {
+  background: var(--iris-risk-high);
+}

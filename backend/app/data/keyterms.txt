@@ -1,0 +1,33 @@
+IFSC
+PAN
+Aadhaar
+CKYC
+GSTIN
+KYC
+NACH
+e-mandate
+UPI AutoPay
+UMRN
+EMI
+APR
+CTC
+foreclosure
+prepayment
+arbitration
+auto-renewal
+processing fee
+GST
+QuickCred
+Nimbus
+UPI
+OTP
+CIBIL
+credit bureau
+mandate
+pre-closure
+part-payment
+bounce charge
+convenience fee
+QuickCred Plus
+QuickCred Shield
+Iris

@@ -1,0 +1,47 @@
+---
+/** "Offer ends in 09:59": counts down from 10:00 and starts again on every reload. */
+---
+
+<p class="countdown">
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="9"></circle>
+    <path d="M12 7v5l3 2"></path>
+  </svg>
+  Offer ends in <span id="offer-countdown">10:00</span>
+</p>
+
+<script>
+  const clock = document.getElementById('offer-countdown');
+  let left = 600;
+  const pad = (value: number) => String(value).padStart(2, '0');
+  setInterval(() => {
+    left = Math.max(0, left - 1);
+    if (clock) clock.textContent = `${pad(Math.floor(left / 60))}:${pad(left % 60)}`;
+  }, 1000);
+</script>
+
+<style>
+  .countdown {
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: #fef2f2;
+    color: var(--qc-danger);
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+</style>

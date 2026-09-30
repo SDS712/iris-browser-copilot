@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout – Sample Shop</title>
+    <style>
+      body {
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        margin: 0;
+        color: #1f2933;
+      }
+      main {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 24px 16px 160px;
+      }
+      .option {
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+        margin: 8px 0;
+      }
+      .summary {
+        border: 1px solid #d0d7de;
+        border-radius: 12px;
+        padding: 16px;
+        margin-top: 16px;
+      }
+      .line {
+        display: flex;
+        justify-content: space-between;
+        margin: 4px 0;
+      }
+      button {
+        font: inherit;
+        padding: 10px 18px;
+        border: 0;
+        border-radius: 8px;
+        background: #3e4c59;
+        color: #fff;
+      }
+      .deal {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: #fdecea;
+      }
+      .cookies {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 16px;
+        background: #fff;
+        border-top: 1px solid #d0d7de;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .cookies[hidden] {
+        display: none;
+      }
+      .cookies .quiet {
+        background: none;
+        color: #52606d;
+        padding: 4px;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Checkout</h1>
+      <p class="deal">Deal ends in <span id="timer">09:59</span></p>
+      <section>
+        <h2>Your order</h2>
+        <div class="line"><span>Travel backpack</span><span>₹2,499</span></div>
+        <div class="option">
+          <input id="protect" type="checkbox" checked />
+          <label for="protect">Protect your purchase ₹299/year</label>
+        </div>
+        <div class="option">
+          <input id="club" type="checkbox" checked />
+          <label for="club">Shop Club: free for 30 days, then ₹199/month</label>
+        </div>
+        <div class="option">
+          <input id="gift" type="checkbox" />
+          <label for="gift">Gift wrap ₹49</label>
+        </div>
+        <div class="summary">
+          <div class="line"><span>Items</span><span>₹2,499</span></div>
+          <div class="line"><span>Due today</span><span>₹2,798</span></div>
+        </div>
+        <button type="button" id="continue">Continue</button>
+      </section>
+      <section id="review" hidden>
+        <h2>Review &amp; pay</h2>
+        <div class="summary">
+          <div class="line"><span>Travel backpack</span><span>₹2,499</span></div>
+          <div class="line"><span>Handling fee</span><span>₹79</span></div>
+          <div class="line"><strong>Total</strong><strong>₹2,877</strong></div>
+        </div>
+      </section>
+    </main>
+    <div class="cookies" role="region" aria-label="Cookie consent">
+      <p>We use cookies to improve your experience.</p>
+      <button type="button" id="accept">Accept all</button>
+      <button type="button" class="quiet" id="manage">Manage choices</button>
+      <div id="manage-panel" hidden><button type="button">Reject all</button></div>
+    </div>
+    <script>
+      let left = 599;
+      const timer = document.getElementById('timer');
+      setInterval(() => {
+        left = Math.max(0, left - 1);
+        timer.textContent = `${String(Math.floor(left / 60)).padStart(2, '0')}:${String(left % 60).padStart(2, '0')}`;
+      }, 1000);
+      document.getElementById('continue').addEventListener('click', () => {
+        document.getElementById('review').hidden = false;
+      });
+      document.getElementById('manage').addEventListener('click', () => {
+        document.getElementById('manage-panel').hidden = false;
+      });
+      document.getElementById('accept').addEventListener('click', () => {
+        document.querySelector('.cookies').hidden = true;
+      });
+    </script>
+  </body>
+</html>

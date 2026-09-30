@@ -1,0 +1,49 @@
+{
+  "name": "extension",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "postinstall": "wxt prepare",
+    "dev": "wxt",
+    "dev:widget": "vite --config vite.widget.config.ts",
+    "build": "wxt build",
+    "build:e2e": "IRIS_DEBUG=true IRIS_MOCK_VOICE=true wxt build --mode e2e",
+    "build:widget": "node scripts/build-widget.ts",
+    "zip": "wxt zip",
+    "size": "node scripts/check-widget-size.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "e2e": "pnpm build:e2e && pnpm build:widget && playwright test",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "gen:api": "node scripts/gen-api-types.mjs",
+    "gen:key": "node scripts/gen-extension-key.mjs"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.8.0",
+    "@fontsource/inter": "^5.3.0",
+    "@preact/signals": "^2.11.2",
+    "lucide-preact": "^1.48.0",
+    "preact": "^10.29.8"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.63.0",
+    "@preact/preset-vite": "^2.10.6",
+    "@testing-library/preact": "^3.2.4",
+    "@types/node": "^24.13.6",
+    "eslint": "^10.11.0",
+    "globals": "^17.12.0",
+    "happy-dom": "^20.14.5",
+    "openapi-typescript": "^7.13.0",
+    "prettier": "^3.9.9",
+    "typescript": "5.9.3",
+    "typescript-eslint": "^8.70.1",
+    "vite": "^8.3.1",
+    "vitest": "^5.0.2",
+    "wxt": "^0.21.4"
+  }
+}

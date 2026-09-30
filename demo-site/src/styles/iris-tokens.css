@@ -1,0 +1,14 @@
+/* The Iris landing page's tokens, a subset of the Iris design. */
+:root {
+  --iris-bg: #f7f8f6;
+  --iris-surface: #ffffff;
+  --iris-text: #1c2b2a;
+  --iris-text-muted: #55655f;
+  --iris-accent: #0f766e;
+  --iris-accent-hover: #115e59;
+  --iris-accent-soft: #ddf3ee;
+  --iris-accent-ink: #115e59;
+  --iris-border: #dde3df;
+  --iris-font: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color-scheme: light;
+}

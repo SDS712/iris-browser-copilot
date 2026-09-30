@@ -1,0 +1,345 @@
+---
+/**
+ * The offer. The hero figures, the fine print and the offer details sit in one
+ * heading section, the way many real offer pages are built, so a reader finds the rate,
+ * tenure and price together. Traps: a flat monthly rate, fine print under the big number,
+ * a "No-cost EMI*" badge and a countdown that restarts on reload.
+ */
+import { FileCheck, ShieldCheck, Zap } from 'lucide-static';
+import { BRAND, FIGURES } from '../../brand';
+import Countdown from '../../components/qc/Countdown.astro';
+import LaptopIllustration from '../../components/qc/LaptopIllustration.astro';
+import QuickCredLayout from '../../layouts/QuickCredLayout.astro';
+
+const finePrint = `*${String(FIGURES.tenure)} monthly instalments at ${FIGURES.rate}. Processing fee ${FIGURES.processingFee} (2% + GST), deducted upfront. T&Cs apply.`;
+const benefits = [
+  {
+    icon: Zap,
+    title: 'Approved in 2 minutes',
+    text: 'A quick check and you know where you stand.',
+  },
+  { icon: FileCheck, title: 'Zero paperwork', text: 'Everything happens online, on your phone.' },
+  {
+    icon: ShieldCheck,
+    title: 'Bank-grade security',
+    text: 'Your details are encrypted end to end.',
+  },
+];
+const steps = [
+  { title: 'Apply in minutes', text: 'Tell us a little about yourself.' },
+  { title: 'Get approved', text: 'We check your details straight away.' },
+  { title: 'Take your laptop home', text: `Pick up your ${BRAND.product} and pay monthly.` },
+];
+---
+
+<QuickCredLayout title={`${BRAND.company} – Own the ${BRAND.product} today`}>
+  <section class="hero qc-soft">
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <p class="qc-badge">No-cost EMI*</p>
+        <h1 class="qc-hero-title">Own the {BRAND.product} today.</h1>
+        <p class="hero__sub">Pay in easy monthly instalments. Approved in 2 minutes.</p>
+        <div class="hero__prices">
+          <div class="hero__price">
+            <span class="hero__label">{BRAND.productLong}</span>
+            <span class="hero__amount">{FIGURES.price}</span>
+          </div>
+          <div class="hero__price">
+            <span class="hero__label">Monthly instalment</span>
+            <span class="hero__emi">{FIGURES.emi}/month*</span>
+          </div>
+        </div>
+        <p class="qc-fine hero__fine">{finePrint}</p>
+        <div class="hero__actions">
+          <a class="qc-button qc-button--large" href="/demo/apply">
+            Apply now
+          </a>
+          <Countdown />
+        </div>
+      </div>
+      <div class="hero__art">
+        <LaptopIllustration />
+        <table class="details">
+          <caption>Offer details</caption>
+          <tbody>
+            <tr>
+              <th scope="row">Laptop price</th>
+              <td>{FIGURES.price}</td>
+            </tr>
+            <tr>
+              <th scope="row">Tenure</th>
+              <td>{String(FIGURES.tenure)} months</td>
+            </tr>
+            <tr>
+              <th scope="row">Interest</th>
+              <td>{FIGURES.rate}</td>
+            </tr>
+            <tr>
+              <th scope="row">Monthly instalment</th>
+              <td>{FIGURES.emi}</td>
+            </tr>
+            <tr>
+              <th scope="row">Processing fee</th>
+              <td>{FIGURES.processingFee} (2% + GST), deducted upfront</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="container benefits" aria-labelledby="benefits-title">
+    <h2 class="qc-section-title visually-hidden" id="benefits-title">
+      Why {BRAND.company}
+    </h2>
+    <ul class="benefits__list">
+      {benefits.map((benefit) => (
+        <li class="benefit">
+          <span class="benefit__icon" set:html={benefit.icon} />
+          <span>
+            <strong>{benefit.title}</strong>
+            <span class="benefit__text">{benefit.text}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="container how" id="how-it-works" aria-labelledby="how-title">
+    <h2 class="qc-page-title" id="how-title">
+      How it works
+    </h2>
+    <ol class="how__steps">
+      {steps.map((step, index) => (
+        <li class="qc-card how__step">
+          <span class="how__number" aria-hidden="true">
+            {String(index + 1)}
+          </span>
+          <strong>{step.title}</strong>
+          <span class="qc-secondary">{step.text}</span>
+        </li>
+      ))}
+    </ol>
+    <p class="qc-fine how__footnote">
+      *No-cost EMI applies only to 3-month tenures on select partner cards. Processing fee still
+      applies.
+    </p>
+  </section>
+</QuickCredLayout>
+
+<style>
+  .hero {
+    padding: 56px 0;
+  }
+
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .hero__copy {
+    display: grid;
+    gap: 20px;
+    align-content: start;
+  }
+
+  .hero__sub {
+    margin: 0;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--qc-muted-on-soft);
+  }
+
+  .hero__prices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 40px;
+    align-items: flex-end;
+  }
+
+  .hero__price {
+    display: grid;
+    gap: 2px;
+  }
+
+  .hero__label {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--qc-muted-on-soft);
+  }
+
+  .hero__amount {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero__emi {
+    font-size: 44px;
+    line-height: 52px;
+    font-weight: 700;
+    color: var(--qc-primary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero__fine {
+    margin: -12px 0 0;
+    max-width: 480px;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hero__art {
+    display: grid;
+    gap: 24px;
+  }
+
+  .details {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border: 1px solid var(--qc-border);
+    border-radius: var(--qc-radius-card);
+    box-shadow: var(--qc-shadow);
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .details caption {
+    padding: 0 0 8px;
+    text-align: left;
+    font-weight: 600;
+  }
+
+  .details th,
+  .details td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--qc-border);
+    text-align: left;
+  }
+
+  .details th {
+    font-weight: 500;
+    color: var(--qc-muted);
+  }
+
+  .details tr:last-child th,
+  .details tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .details td {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .benefits {
+    padding: 40px 24px;
+  }
+
+  .benefits__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .benefit {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .benefit strong {
+    display: block;
+  }
+
+  .benefit__text {
+    color: var(--qc-muted);
+    font-size: 15px;
+  }
+
+  .benefit__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--qc-bg-soft);
+    color: var(--qc-primary);
+  }
+
+  .benefit__icon :global(svg) {
+    width: 22px;
+    height: 22px;
+  }
+
+  .how {
+    display: grid;
+    gap: 24px;
+    padding-top: 24px;
+  }
+
+  .how__steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .how__step {
+    display: grid;
+    gap: 6px;
+  }
+
+  .how__number {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--qc-primary);
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .how__footnote {
+    margin: 8px 0 0;
+  }
+
+  @media (max-width: 860px) {
+    .hero__inner,
+    .benefits__list,
+    .how__steps {
+      grid-template-columns: 1fr;
+    }
+
+    .hero {
+      padding: 32px 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .qc-hero-title {
+      font-size: 36px;
+      line-height: 44px;
+    }
+
+    .hero__emi {
+      font-size: 36px;
+      line-height: 44px;
+    }
+  }
+</style>

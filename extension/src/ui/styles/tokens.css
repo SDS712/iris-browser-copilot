@@ -1,0 +1,77 @@
+/* Design tokens. Scoped to Iris's own root so no page style is touched. */
+.iris-root {
+  --iris-bg: #f7f8f6;
+  --iris-surface: #ffffff;
+  --iris-surface-muted: #eef2ef;
+  --iris-border: #dde3df;
+  --iris-text: #1c2b2a;
+  --iris-text-muted: #55655f;
+  --iris-accent: #0f766e;
+  --iris-accent-hover: #115e59;
+  --iris-accent-soft: #ddf3ee;
+  --iris-accent-ink: #115e59;
+  --iris-on-accent: #ffffff;
+  --iris-risk-high: #b42318;
+  --iris-risk-medium: #b54708;
+  --iris-risk-info: #667085;
+  --iris-ok: #067647;
+  --iris-verdict-ink: #ffffff;
+  --iris-card-shadow: 0 1px 2px rgba(16, 24, 23, 0.06), 0 4px 12px rgba(16, 24, 23, 0.06);
+  --iris-card-border: transparent;
+
+  --iris-dur-fast: 120ms;
+  --iris-dur-base: 200ms;
+  --iris-dur-slow: 320ms;
+  --iris-ease-in: cubic-bezier(0.2, 0, 0, 1);
+  --iris-ease-out: cubic-bezier(0.4, 0, 1, 1);
+
+  --iris-font: IrisInter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  .iris-root:not([data-iris-theme='light']) {
+    --iris-bg: #0e1615;
+    --iris-surface: #16211f;
+    --iris-surface-muted: #1d2a28;
+    --iris-border: #2a3a37;
+    --iris-text: #e6eeec;
+    --iris-text-muted: #a3b3af;
+    --iris-accent: #2dd4bf;
+    --iris-accent-hover: #5eead4;
+    --iris-accent-soft: #123a35;
+    --iris-accent-ink: #99f0e1;
+    --iris-on-accent: #04201d;
+    --iris-risk-high: #f97066;
+    --iris-risk-medium: #fdb022;
+    --iris-risk-info: #98a2b3;
+    --iris-ok: #47cd89;
+    --iris-verdict-ink: #0e1615;
+    --iris-card-shadow: none;
+    --iris-card-border: #2a3a37;
+    color-scheme: dark;
+  }
+}
+
+/* Forced dark theme, used by the component gallery to show both themes side by side. */
+.iris-root[data-iris-theme='dark'] {
+  --iris-bg: #0e1615;
+  --iris-surface: #16211f;
+  --iris-surface-muted: #1d2a28;
+  --iris-border: #2a3a37;
+  --iris-text: #e6eeec;
+  --iris-text-muted: #a3b3af;
+  --iris-accent: #2dd4bf;
+  --iris-accent-hover: #5eead4;
+  --iris-accent-soft: #123a35;
+  --iris-accent-ink: #99f0e1;
+  --iris-on-accent: #04201d;
+  --iris-risk-high: #f97066;
+  --iris-risk-medium: #fdb022;
+  --iris-risk-info: #98a2b3;
+  --iris-ok: #47cd89;
+  --iris-verdict-ink: #0e1615;
+  --iris-card-shadow: none;
+  --iris-card-border: #2a3a37;
+  color-scheme: dark;
+}
