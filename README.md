@@ -20,7 +20,7 @@ Built for the AssemblyAI Voice Agent Hackathon.
 |---|---|---|
 | Chrome extension (side panel) and an embeddable widget | `extension/` | TypeScript, Preact, WXT (Manifest V3) |
 | Backend: voice tokens, the agent's tools, spend caps | `backend/` | Python 3.13, FastAPI |
-| Demo site: a landing page and QuickCred, a fictional lender with the tricks real sites use | `demo-site/` | Astro (static) |
+| Demo site: a landing page and QuickCred, a fictional lender with the tricks real sites use, with Iris built in as a widget | `demo-site/` | Astro (static) |
 
 - **Voice:** [AssemblyAI's Voice Agent API](https://www.assemblyai.com/docs) handles listening, turn-taking, interruptions and Iris's voice. The browser talks to it directly with a short-lived token from the backend, and the agent calls Iris's tools as client-side tools.
 - **Reading and reasoning:** Claude, through AssemblyAI's LLM Gateway, for long terms, page questions and scans.
@@ -46,9 +46,14 @@ Fake mode swaps every paid service for a deterministic fake, and mock voice repl
 cd backend
 IRIS_FAKE_UPSTREAMS=1 DATA_DIR=.data uv run uvicorn app.main:app --port 8000 --no-access-log
 
-# Terminal 2: the extension with mock voice, and the demo site
+# Terminal 2: the demo site, with Iris built in
+pnpm --filter demo-site dev
+```
+
+Open http://localhost:4321/demo/?iris_mock_voice=1 and open Iris from the button at the bottom of the page. To try the extension the same way, build it with mock voice and load it (below):
+
+```sh
 IRIS_API_BASE=http://localhost:8000/api IRIS_MOCK_VOICE=true pnpm --filter extension build
-pnpm --filter demo-site dev          # http://localhost:4321/demo/
 ```
 
 ### With real voice and answers
@@ -60,7 +65,7 @@ cd backend && DATA_DIR=.data uv run uvicorn app.main:app --port 8000 --no-access
 IRIS_API_BASE=http://localhost:8000/api pnpm --filter extension build
 ```
 
-The backend refuses paid calls beyond the daily and total caps in `.env` (`BUDGET_DAILY_USD`, `BUDGET_TOTAL_USD`).
+The demo pages' widget uses real voice too (drop `?iris_mock_voice=1`). The backend refuses paid calls beyond the daily and total caps in `.env` (`BUDGET_DAILY_USD`, `BUDGET_TOTAL_USD`).
 
 ### Load the extension
 
@@ -93,7 +98,7 @@ The backend runs as one always-on container, because it keeps page snapshots in 
    - `IRIS_ENV=prod`
    - `ASSEMBLYAI_API_KEY` and `TAVILY_API_KEY`
    - `IRIS_PUBLIC_URL=https://<your-backend-domain>`
-   - `ALLOWED_ORIGINS=chrome-extension://kjcchlmlkmljbpaobhidapkobbbdfmap,https://<your-site-domain>`
+   - `ALLOWED_ORIGINS=chrome-extension://kjcchlmlkmljbpaobhidapkobbbdfmap,https://<your-site-domain>`: the extension, and the demo pages' widget, which calls the backend from your site's domain
    - `RAILWAY_RUN_UID=0` (the image runs as a non-root user, and this lets it write to the volume)
 5. **Networking** → **Generate Domain**, with port `8000`. Check `https://<your-backend-domain>/api/health`.
 
@@ -101,11 +106,11 @@ The backend runs as one always-on container, because it keeps page snapshots in 
 
 1. **Add New Project** → import this repo, leaving **Root Directory** as the repo root. `vercel.json` sets the install and build commands and the output folder.
 2. Add the environment variables:
-   - `IRIS_API_BASE=https://<your-backend-domain>/api`: the extension download on the landing page is built against it
+   - `IRIS_API_BASE=https://<your-backend-domain>/api`: the demo pages' widget calls it, and the extension download on the landing page is built against it
    - `IRIS_PUBLIC_URL=https://<your-site-domain>`
    - `ENABLE_EXPERIMENTAL_COREPACK=1`, so the build uses the pnpm version in `package.json`
-   - Optional: `IRIS_GITHUB_URL` and `IRIS_VIDEO_URL` for the landing page's links
-3. Deploy. The landing page offers the extension zip at `/downloads/iris-extension.zip`.
+   - Optional: `IRIS_GITHUB_URL` and `IRIS_VIDEO_URL` for the landing page's links, and `IRIS_DEMO_WIDGET=false` to leave the widget off the demo pages
+3. Deploy. Visitors can talk to Iris on `/demo/` straight away, and the landing page offers the extension zip at `/downloads/iris-extension.zip`.
 
 The extension's ID is fixed by the public key in `extension/wxt.config.ts`, so `ALLOWED_ORIGINS` stays the same for every build.
 

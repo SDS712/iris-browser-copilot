@@ -1,7 +1,8 @@
 ---
 /**
- * Every QuickCred page: the honesty banner, header, footer, cookie banner, toast and, when
- * built with IRIS_DEMO_WIDGET=true, the Iris widget. Ordinary markup only.
+ * Every QuickCred page: the honesty banner, header, footer, cookie banner, toast and the
+ * Iris widget, which talks to IRIS_API_BASE (IRIS_DEMO_WIDGET=false leaves it out).
+ * Ordinary markup only.
  */
 import '@fontsource/plus-jakarta-sans/400.css';
 import '@fontsource/plus-jakarta-sans/500.css';
@@ -10,7 +11,7 @@ import '@fontsource/plus-jakarta-sans/700.css';
 import '../styles/qc-tokens.css';
 import '../styles/base.css';
 import '../styles/qc.css';
-import { IRIS_DEMO_WIDGET, IRIS_PUBLIC_URL } from 'astro:env/server';
+import { IRIS_API_BASE, IRIS_DEMO_WIDGET, IRIS_PUBLIC_URL } from 'astro:env/server';
 import CookieBanner from '../components/qc/CookieBanner.astro';
 import Footer from '../components/qc/Footer.astro';
 import Header from '../components/qc/Header.astro';
@@ -52,7 +53,7 @@ const canonical = new URL(Astro.url.pathname, IRIS_PUBLIC_URL).href;
     <CookieBanner />
     <Toast />
     {widget && IRIS_DEMO_WIDGET && (
-      <script is:inline src="/widget/iris-widget.js" defer data-api-base="/api"></script>
+      <script is:inline src="/widget/iris-widget.js" defer data-api-base={IRIS_API_BASE}></script>
     )}
   </body>
 </html>

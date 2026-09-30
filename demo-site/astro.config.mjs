@@ -18,8 +18,10 @@ export default defineConfig({
       }),
       IRIS_VIDEO_URL: envField.string({ context: 'server', access: 'public', default: '' }),
       IRIS_GITHUB_URL: envField.string({ context: 'server', access: 'public', default: '' }),
-      // The demo is shown with the Chrome extension, so the in-page widget is opt-in.
-      IRIS_DEMO_WIDGET: envField.boolean({ context: 'server', access: 'public', default: false }),
+      // The in-page widget on /demo/* pages: on, so visitors can try Iris without the extension.
+      IRIS_DEMO_WIDGET: envField.boolean({ context: 'server', access: 'public', default: true }),
+      // Where the widget sends its requests: this site's /api, or the backend's full URL.
+      IRIS_API_BASE: envField.string({ context: 'server', access: 'public', default: '/api' }),
     },
   },
   vite: {
